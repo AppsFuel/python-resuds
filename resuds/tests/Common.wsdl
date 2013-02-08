@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<wsdl:definitions targetNamespace="http://Amobee.com/Common/"
+	xmlns:cmn="http://Amobee.com/Common/Schema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+	<wsdl:types>
+		<s:schema targetNamespace="http://Amobee.com/Common/"
+			xmlns:s="http://www.w3.org/2001/XMLSchema">
+			<s:import namespace="http://Amobee.com/Common/Schema"
+				schemaLocation="Common.xsd" />
+			<s:import namespace="http://www.w3.org/2001/XMLSchema" />
+			
+		</s:schema>
+	</wsdl:types>
+	<wsdl:message name="Empty">
+	</wsdl:message>
+	<wsdl:message name="CMS_API_Exception">
+		<wsdl:part name="CMS_Error" element="cmn:CMS_Error" />
+	</wsdl:message>	
+	<wsdl:message name="EmptyResponseSoapOut">
+        <wsdl:part name="parameters" element="cmn:EmptyResponse" />
+    </wsdl:message>
+	
+</wsdl:definitions>

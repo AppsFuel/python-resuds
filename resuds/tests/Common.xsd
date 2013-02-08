@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<s:schema xmlns:cmn="http://Amobee.com/Common/Schema"
+	targetNamespace="http://Amobee.com/Common/Schema" xmlns:s="http://www.w3.org/2001/XMLSchema">
+	<s:import namespace="http://www.w3.org/2001/XMLSchema" />
+	<s:element name="CMS_Error">
+		<s:complexType>
+			<s:attribute name="userName" type="s:string" use="required" />
+			<s:attribute name="operatorId" type="s:int" use="required" />
+			<s:attribute name="errorCode" type="s:string" use="required" />
+			<s:attribute name="errorDescription" type="s:string" use="required" />
+		</s:complexType>
+	</s:element>
+	<s:element name="EmptyResponse">
+		<s:complexType>
+			<s:sequence>
+			</s:sequence>
+		</s:complexType>
+	</s:element>
+	<s:complexType name="TargetedRangeValue">
+		<s:attribute name="FromValue" type="s:long" use="required" />
+		<s:attribute name="ToValue" type="s:long" use="required" />
+	</s:complexType>
+	<s:complexType name="AdspaceId">
+		<s:attribute name="Id" type="s:int" use="required" />
+		<s:attribute name="ExternalId" type="s:string" use="required" />
+	</s:complexType>
+	<s:complexType name="CategoryId">
+		<s:attribute name="Id" type="s:int" use="required" />
+		<s:attribute name="ExternalId" type="s:string" use="required" />
+	</s:complexType>
+	<s:simpleType name="AttributeTypeEnum">
+		<s:restriction base="s:string">
+			<s:enumeration value="LIST"></s:enumeration>
+			<s:enumeration value="RANGE"></s:enumeration>
+			<s:enumeration value="SUBSCRIBERS_GROUP"></s:enumeration>
+			<s:enumeration value="KEYWORDS"></s:enumeration>
+		</s:restriction>
+	</s:simpleType>
+	<s:complexType name="TopicList">
+		<s:sequence>
+			<s:element minOccurs="0" maxOccurs="unbounded" name="Topic"
+				type="cmn:Topic" />
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="Topic">
+		<s:attribute name="Id" type="s:int" use="required" />
+		<s:attribute name="Name" type="s:string" use="required" />
+	</s:complexType>
+	<s:complexType name="EntityIdList">
+		<s:sequence>
+			<s:element minOccurs="1" maxOccurs="unbounded" name="EntityId" type="s:int" />
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="SalesHouseList">
+		<s:sequence>
+			<s:element minOccurs="0" maxOccurs="unbounded" name="SalesHouse" type="cmn:SalesHouse" />
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="SalesHouse">
+		<s:attribute name="Id" type="s:int" use="optional" />
+		<s:attribute name="Name" type="s:string" use="required" />
+		<s:attribute name="Description" type="s:string" use="optional" />
+		<s:attribute name="DefaultCurrencyId" type="s:int" use="required" />
+	</s:complexType>
+<!--	<s:simpleType name="MediaChannel">-->
+<!--		<s:restriction base="s:string">-->
+<!--			<s:enumeration value="WAP"></s:enumeration>-->
+<!--			<s:enumeration value="SMS"></s:enumeration>-->
+<!--			<s:enumeration value="MMS"></s:enumeration>-->
+<!--			<s:enumeration value="IN_APPLICATION"></s:enumeration>-->
+<!--			<s:enumeration value="AUDIO"></s:enumeration>-->
+<!--		</s:restriction>-->
+<!--	</s:simpleType>-->
+</s:schema>

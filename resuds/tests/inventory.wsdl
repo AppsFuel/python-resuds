@@ -1,0 +1,1101 @@
+<wsdl:definitions targetNamespace="http://Amobee.com/"
+                  xmlns:tns="http://Amobee.com/"
+                  xmlns:cmn="http://Amobee.com/Common/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/wsdl11soap12.xsd"
+                  xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://schemas.xmlsoap.org/wsdl/
+http://schemas.xmlsoap.org/wsdl/ ">
+    <wsdl:import namespace="http://Amobee.com/Common/"
+                 location="Common.wsdl"/>
+    <wsdl:types>
+        <s:schema targetNamespace="http://Amobee.com/"
+                  xmlns:cmn="http://Amobee.com/Common/Schema"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema">
+            <s:import namespace="http://www.w3.org/2001/XMLSchema"/>
+            <s:import namespace="http://Amobee.com/Common/Schema"
+                      schemaLocation="Common.xsd"/>
+            <s:element name="GetAdSpaceList">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="pwd"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="operatorId"
+                                   type="s:int"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetAdSpaceById">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="pwd"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="operatorId" type="s:int"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="adSpaceId"
+                                   type="s:int"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetAdSpaceByExternalId">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="pwd"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="operatorId" type="s:int"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="externalId" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetAdSpaceSalesHouses">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="pwd"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="operatorId" type="s:int"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="adSpaceId"
+                                   type="s:int"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetAdSpaceSalesHousesResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="SalesHouseIdsList"
+                                   type="cmn:SalesHouseList"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="SearchCategoryByCriteria">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="pwd"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="operatorId"
+                                   type="s:int"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="categoryCriteria"
+                                   type="tns:categoryCriteria"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="SearchAdspaceByCriteria">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="pwd"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="operatorId"
+                                   type="s:int"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="adspaceCriteria"
+                                   type="tns:adspaceCriteria"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:complexType name="categoryCriteria">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="1" name="categoryName"
+                               type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="adspaceName"
+                               type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="flightName"
+                               type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="publisherId"
+                               type="s:int"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="adspaceCriteria">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="1" name="adspaceName"
+                               type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="categoryName"
+                               type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="flightName"
+                               type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="publisherId"
+                               type="s:int"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="MediaChannel"
+                               type="s:int"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="formatId"
+                               type="s:int"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="state"
+                               type="tns:AdspaceStateEnum"/>
+                </s:sequence>
+            </s:complexType>
+            <s:simpleType name="AdspaceStateEnum">
+                <s:restriction base="s:string">
+                    <s:enumeration value="ENABLED"/>
+                    <s:enumeration value="DISABLE"/>
+                </s:restriction>
+            </s:simpleType>
+            <s:element name="GetAdSpaceListResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1"
+                                   name="AdspaceList"
+                                   type="tns:AdspaceList"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetAdSpaceResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="Adspace"
+                                   type="tns:Adspace"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetCategoryList">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="pwd"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="operatorId" type="s:int"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetContextualCategoryList">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="pwd"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="operatorId" type="s:int"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetCategoryById">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="pwd"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="operatorId" type="s:int"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="categoryId" type="s:int"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetCategoryResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="Category"
+                                   type="tns:Category"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetCategoryListResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1"
+                                   name="CategoryList"
+                                   type="tns:CategoryList"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetContextualCategoryListResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1"
+                                   name="CategoryList"
+                                   type="tns:ContextualCategoryList"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetCategoryGroupList">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="pwd"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="operatorId" type="s:int"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GetCategoryGroupListResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1"
+                                   name="CategoryGroupList"
+                                   type="tns:CategoryGroupList"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="CreateAdspace">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="pwd"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="operatorId"
+                                   type="s:int"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="Adspace"
+                                   type="tns:Adspace"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="CreateAdspaceResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="adspaceId"
+                                   type="s:int"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="UpdateAdspace">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="pwd"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="operatorId"
+                                   type="s:int"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="Adspace"
+                                   type="tns:Adspace"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="CreateCategory">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="pwd"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="operatorId"
+                                   type="s:int"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="Category"
+                                   type="tns:Category"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="CreateCategoryResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="categoryId"
+                                   type="s:int"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="UpdateCategory">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="pwd"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="operatorId"
+                                   type="s:int"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="Category"
+                                   type="tns:Category"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="DeleteAdSpace">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="pwd"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="operatorId" type="s:int"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="adSpaceId"
+                                   type="s:int"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="DeleteCategory">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="pwd"
+                                   type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="operatorId" type="s:int"/>
+                        <s:element minOccurs="1" maxOccurs="1"
+                                   name="categoryId" type="s:int"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:complexType name="AdspaceList">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="unbounded"
+                               name="Adspace"
+                               type="tns:Adspace"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="Adspace">
+                <s:sequence>
+                    <s:element minOccurs="1" maxOccurs="1"
+                               name="FormatResourceTypeList"
+                               type="tns:FormatResourceTypeList"/>
+                    <s:element minOccurs="0" maxOccurs="1"
+                               name="CategoryIdList" type="cmn:EntityIdList"/>
+                    <s:element minOccurs="0" maxOccurs="1"
+                               name="ExcludedTopicIdList"
+                               type="cmn:EntityIdList"/>
+                </s:sequence>
+                <s:attribute name="Id" type="s:int" use="optional"/>
+                <s:attribute name="ExternalId" type="s:string" use="optional"/>
+                <s:attribute name="Name" type="s:string" use="required"/>
+                <s:attribute name="Description" type="s:string"
+                             use="optional"/>
+                <s:attribute name="PublisherId" type="s:int" use="required"/>
+                <s:attribute name="MediaChannelId" type="s:int"
+                             use="required"/>
+                <s:attribute name="PlacementWidth" type="s:int"
+                             use="optional"/>
+                <s:attribute name="PlacementHeight" type="s:int"
+                             use="optional"/>
+                <s:attribute name="Active" type="s:boolean" use="required"/>
+                <s:attribute name="LongTail" type="s:boolean" use="required"/>
+                <s:attribute name="EstDailyUsers" type="s:int" use="optional"
+                             default="1"/>
+                <s:attribute name="EstDailyImps" type="s:int" use="optional"
+                             default="1"/>
+                <s:attribute name="AllowCompanionFlights" type="s:boolean"
+                             use="optional"/>
+                <s:attribute name="Test" type="s:boolean" use="optional"
+                             default="false"/>
+                <s:attribute name="SupportConvTracking" type="s:boolean"
+                             use="optional" default="false"/>
+                <s:attribute name="MinAllowedCPC" type="s:double"
+                             use="optional"/>
+                <s:attribute name="MinAllowedCPM" type="s:double"
+                             use="optional"/>
+            </s:complexType>
+            <s:complexType name="FormatResourceTypeList">
+                <s:sequence>
+                    <s:element minOccurs="1" maxOccurs="unbounded"
+                               name="FormatResourceType"
+                               type="tns:FormatResourceType"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="FormatResourceType">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="1"
+                               name="ResourceTypeIdList"
+                               type="cmn:EntityIdList"/>
+                </s:sequence>
+                <s:attribute name="FormatId" type="s:int" use="required"/>
+            </s:complexType>
+            <s:complexType name="CategoryGroupList">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="unbounded"
+                               name="CategoryGroup"
+                               type="tns:CategoryGroup"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="CategoryGroup">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="unbounded"
+                               name="CategoryIdList" type="cmn:EntityIdList"/>
+                </s:sequence>
+                <s:attribute name="Id" type="s:int" use="required"/>
+                <s:attribute name="Name" type="s:string" use="required"/>
+                <s:attribute name="Description" type="s:string"
+                             use="optional"/>
+            </s:complexType>
+            <s:complexType name="CategoryList">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="unbounded"
+                               name="Category"
+                               type="tns:Category"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="ContextualCategoryList">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="unbounded"
+                               name="Category"
+                               type="tns:ContextualCategory"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="Category">
+                <s:attribute name="Id" type="s:int" use="optional"/>
+                <s:attribute name="Description" type="s:string"
+                             use="optional"/>
+                <s:attribute name="Name" type="s:string" use="required"/>
+                <s:attribute name="CategoryGroupId" type="s:int"
+                             use="optional"/>
+                <s:attribute name="LongTail" type="s:boolean" use="required"/>
+            </s:complexType>
+            <s:complexType name="ContextualCategory">
+                <s:attribute name="Id" type="s:int" use="optional"/>
+                <s:attribute name="Description" type="s:string"
+                             use="optional"/>
+                <s:attribute name="Name" type="s:string" use="required"/>
+                <s:attribute name="ParentId" type="s:int" use="optional"/>
+            </s:complexType>
+        </s:schema>
+    </wsdl:types>
+    <wsdl:message name="GetAdSpaceListSoapIn">
+        <wsdl:part name="parameters" element="tns:GetAdSpaceList"/>
+    </wsdl:message>
+    <wsdl:message name="GetAdSpaceByIdSoapIn">
+        <wsdl:part name="parameters" element="tns:GetAdSpaceById"/>
+    </wsdl:message>
+    <wsdl:message name="GetAdSpaceByExternalIdSoapIn">
+        <wsdl:part name="parameters" element="tns:GetAdSpaceByExternalId"/>
+    </wsdl:message>
+    <wsdl:message name="SearchAdspaceByCriteriaSoapIn">
+        <wsdl:part name="parameters" element="tns:SearchAdspaceByCriteria"/>
+    </wsdl:message>
+    <wsdl:message name="SearchCategoryByCriteriaSoapIn">
+        <wsdl:part name="parameters" element="tns:SearchCategoryByCriteria"/>
+    </wsdl:message>
+    <wsdl:message name="GetAdSpaceSoapOut">
+        <wsdl:part name="parameters" element="tns:GetAdSpaceResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GetAdSpaceListSoapOut">
+        <wsdl:part name="parameters" element="tns:GetAdSpaceListResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GetCategoryByIdSoapIn">
+        <wsdl:part name="parameters" element="tns:GetCategoryById"/>
+    </wsdl:message>
+    <wsdl:message name="GetCategorySoapOut">
+        <wsdl:part name="parameters" element="tns:GetCategoryResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GetCategoryListSoapIn">
+        <wsdl:part name="parameters" element="tns:GetCategoryList"/>
+    </wsdl:message>
+    <wsdl:message name="GetCategoryListSoapOut">
+        <wsdl:part name="parameters" element="tns:GetCategoryListResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GetContextualCategoryListSoapIn">
+        <wsdl:part name="parameters" element="tns:GetContextualCategoryList"/>
+    </wsdl:message>
+    <wsdl:message name="GetContextualCategoryListSoapOut">
+        <wsdl:part name="parameters"
+                   element="tns:GetContextualCategoryListResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GetCategoryGroupListSoapIn">
+        <wsdl:part name="parameters" element="tns:GetCategoryGroupList"/>
+    </wsdl:message>
+    <wsdl:message name="GetCategoryGroupListSoapOut">
+        <wsdl:part name="parameters"
+                   element="tns:GetCategoryGroupListResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CreateAdspaceSoapIn">
+        <wsdl:part name="parameters" element="tns:CreateAdspace"/>
+    </wsdl:message>
+    <wsdl:message name="CreateAdspaceSoapOut">
+        <wsdl:part name="parameters" element="tns:CreateAdspaceResponse"/>
+    </wsdl:message>
+    <wsdl:message name="UpdateAdspaceSoapIn">
+        <wsdl:part name="parameters" element="tns:UpdateAdspace"/>
+    </wsdl:message>
+    <wsdl:message name="CreateCategorySoapIn">
+        <wsdl:part name="parameters" element="tns:CreateCategory"/>
+    </wsdl:message>
+    <wsdl:message name="CreateCategorySoapOut">
+        <wsdl:part name="parameters" element="tns:CreateCategoryResponse"/>
+    </wsdl:message>
+    <wsdl:message name="UpdateCategorySoapIn">
+        <wsdl:part name="parameters" element="tns:UpdateCategory"/>
+    </wsdl:message>
+    <wsdl:message name="GetAdSpaceSalesHousesSoapIn">
+        <wsdl:part name="parameters" element="tns:GetAdSpaceSalesHouses"/>
+    </wsdl:message>
+    <wsdl:message name="GetAdSpaceSalesHousesSoapOut">
+        <wsdl:part name="parameters"
+                   element="tns:GetAdSpaceSalesHousesResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="DeleteAdSpaceSoapIn">
+        <wsdl:part name="parameters" element="tns:DeleteAdSpace"/>
+    </wsdl:message>
+    <wsdl:message name="DeleteCategorySoapIn">
+        <wsdl:part name="parameters" element="tns:DeleteCategory"/>
+    </wsdl:message>
+
+    <wsdl:portType name="InventoryWSSoap">
+        <wsdl:operation name="GetAdSpaceList">
+            <wsdl:input message="tns:GetAdSpaceListSoapIn"/>
+            <wsdl:output message="tns:GetAdSpaceListSoapOut"/>
+            <wsdl:fault name="CMS_API_Exception"
+                        message="cmn:CMS_API_Exception"/>
+
+        </wsdl:operation>
+        <wsdl:operation name="GetAdSpaceById">
+            <wsdl:input message="tns:GetAdSpaceByIdSoapIn"/>
+            <wsdl:output message="tns:GetAdSpaceSoapOut"/>
+            <wsdl:fault name="CMS_API_Exception"
+                        message="cmn:CMS_API_Exception"/>
+
+        </wsdl:operation>
+        <wsdl:operation name="GetAdSpaceByExternalId">
+            <wsdl:input message="tns:GetAdSpaceByExternalIdSoapIn"/>
+            <wsdl:output message="tns:GetAdSpaceSoapOut"/>
+            <wsdl:fault name="CMS_API_Exception"
+                        message="cmn:CMS_API_Exception"/>
+
+        </wsdl:operation>
+        <wsdl:operation name="SearchAdspaceByCriteria">
+            <wsdl:input message="tns:SearchAdspaceByCriteriaSoapIn"/>
+            <wsdl:output message="tns:GetAdSpaceListSoapOut"/>
+            <wsdl:fault name="CMS_API_Exception"
+                        message="cmn:CMS_API_Exception"/>
+
+        </wsdl:operation>
+        <wsdl:operation name="SearchCategoryByCriteria">
+            <wsdl:input message="tns:SearchCategoryByCriteriaSoapIn"/>
+            <wsdl:output message="tns:GetCategoryListSoapOut"/>
+            <wsdl:fault name="CMS_API_Exception"
+                        message="cmn:CMS_API_Exception"/>
+
+        </wsdl:operation>
+        <wsdl:operation name="GetCategoryById">
+            <wsdl:input message="tns:GetCategoryByIdSoapIn"/>
+            <wsdl:output message="tns:GetCategorySoapOut"/>
+            <wsdl:fault name="CMS_API_Exception"
+                        message="cmn:CMS_API_Exception"/>
+
+        </wsdl:operation>
+        <wsdl:operation name="GetCategoryList">
+            <wsdl:input message="tns:GetCategoryListSoapIn"/>
+            <wsdl:output message="tns:GetCategoryListSoapOut"/>
+            <wsdl:fault name="CMS_API_Exception"
+                        message="cmn:CMS_API_Exception"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetContextualCategoryList">
+            <wsdl:input message="tns:GetContextualCategoryListSoapIn"/>
+            <wsdl:output message="tns:GetContextualCategoryListSoapOut"/>
+            <wsdl:fault name="CMS_API_Exception"
+                        message="cmn:CMS_API_Exception"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetCategoryGroupList">
+            <wsdl:input message="tns:GetCategoryGroupListSoapIn"/>
+            <wsdl:output message="tns:GetCategoryGroupListSoapOut"/>
+            <wsdl:fault name="CMS_API_Exception"
+                        message="cmn:CMS_API_Exception"/>
+        </wsdl:operation>
+        <wsdl:operation name="CreateAdspace">
+            <wsdl:documentation></wsdl:documentation>
+            <wsdl:input message="tns:CreateAdspaceSoapIn"/>
+            <wsdl:output message="tns:CreateAdspaceSoapOut"/>
+            <wsdl:fault name="CMS_API_Exception"
+                        message="cmn:CMS_API_Exception"/>
+        </wsdl:operation>
+        <wsdl:operation name="UpdateAdspace">
+            <wsdl:documentation></wsdl:documentation>
+            <wsdl:input message="tns:UpdateAdspaceSoapIn"/>
+            <wsdl:output message="cmn:EmptyResponseSoapOut"/>
+            <wsdl:fault name="CMS_API_Exception"
+                        message="cmn:CMS_API_Exception"/>
+        </wsdl:operation>
+        <wsdl:operation name="CreateCategory">
+            <wsdl:documentation></wsdl:documentation>
+            <wsdl:input message="tns:CreateCategorySoapIn"/>
+            <wsdl:output message="tns:CreateCategorySoapOut"/>
+            <wsdl:fault name="CMS_API_Exception"
+                        message="cmn:CMS_API_Exception"/>
+        </wsdl:operation>
+        <wsdl:operation name="UpdateCategory">
+            <wsdl:documentation></wsdl:documentation>
+            <wsdl:input message="tns:UpdateCategorySoapIn"/>
+            <wsdl:output message="cmn:EmptyResponseSoapOut"/>
+            <wsdl:fault name="CMS_API_Exception"
+                        message="cmn:CMS_API_Exception"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetAdSpaceSalesHouses">
+            <wsdl:documentation></wsdl:documentation>
+            <wsdl:input message="tns:GetAdSpaceSalesHousesSoapIn"/>
+            <wsdl:output message="tns:GetAdSpaceSalesHousesSoapOut"/>
+            <wsdl:fault name="CMS_API_Exception"
+                        message="cmn:CMS_API_Exception"/>
+        </wsdl:operation>
+        <wsdl:operation name="DeleteAdSpace">
+            <wsdl:documentation></wsdl:documentation>
+            <wsdl:input message="tns:DeleteAdSpaceSoapIn"/>
+            <wsdl:output message="cmn:EmptyResponseSoapOut"/>
+            <wsdl:fault name="CMS_API_Exception"
+                        message="cmn:CMS_API_Exception"/>
+        </wsdl:operation>
+        <wsdl:operation name="DeleteCategory">
+            <wsdl:documentation></wsdl:documentation>
+            <wsdl:input message="tns:DeleteCategorySoapIn"/>
+            <wsdl:output message="cmn:EmptyResponseSoapOut"/>
+            <wsdl:fault name="CMS_API_Exception"
+                        message="cmn:CMS_API_Exception"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="InventoryWSSoap" type="tns:InventoryWSSoap">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetAdSpaceList">
+            <soap:operation soapAction="http://Amobee.com/GetAdSpaceList"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetAdSpaceById">
+            <soap:operation soapAction="http://Amobee.com/GetAdSpaceById"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetAdSpaceByExternalId">
+            <soap:operation
+                    soapAction="http://Amobee.com/GetAdSpaceByExternalId"
+                    style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="SearchAdspaceByCriteria">
+            <soap:operation
+                    soapAction="http://Amobee.com/SearchAdspaceByCriteria"
+                    style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetCategoryById">
+            <soap:operation soapAction="http://Amobee.com/GetCategoryById"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="SearchCategoryByCriteria">
+            <soap:operation
+                    soapAction="http://Amobee.com/SearchCategoryByCriteria"
+                    style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetCategoryList">
+            <soap:operation soapAction="http://Amobee.com/GetCategoryList"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetContextualCategoryList">
+            <soap:operation
+                    soapAction="http://Amobee.com/GetContextualCategoryList"
+                    style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetCategoryGroupList">
+            <soap:operation soapAction="http://Amobee.com/GetCategoryGroupList"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="CreateAdspace">
+            <soap:operation soapAction="http://Amobee.com/CreateAdspace"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="UpdateAdspace">
+            <soap:operation soapAction="http://Amobee.com/UpdateAdspace"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="CreateCategory">
+            <soap:operation soapAction="http://Amobee.com/CreateCategory"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="UpdateCategory">
+            <soap:operation soapAction="http://Amobee.com/UpdateCategory"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="DeleteAdSpace">
+            <soap:operation soapAction="http://Amobee.com/DeleteAdSpace"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="DeleteCategory">
+            <soap:operation soapAction="http://Amobee.com/DeleteCategory"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetAdSpaceSalesHouses">
+            <soap:operation
+                    soapAction="http://Amobee.com/GetAdSpaceSalesHouses"
+                    style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="InventoryWSSoap12" type="tns:InventoryWSSoap">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetAdSpaceList">
+            <soap12:operation soapAction="http://Amobee.com/GetAdSpaceList"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap12:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetAdSpaceById">
+            <soap12:operation soapAction="http://Amobee.com/GetAdSpaceById"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap12:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetAdSpaceByExternalId">
+            <soap12:operation
+                    soapAction="http://Amobee.com/GetAdSpaceByExternalId"
+                    style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap12:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="SearchAdspaceByCriteria">
+            <soap12:operation
+                    soapAction="http://Amobee.com/SearchAdspaceByCriteria"
+                    style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap12:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetCategoryById">
+            <soap12:operation soapAction="http://Amobee.com/GetCategoryById"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap12:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="SearchCategoryByCriteria">
+            <soap12:operation
+                    soapAction="http://Amobee.com/SearchCategoryByCriteria"
+                    style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap12:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetCategoryList">
+            <soap12:operation soapAction="http://Amobee.com/GetCategoryList"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap12:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetContextualCategoryList">
+            <soap12:operation
+                    soapAction="http://Amobee.com/GetContextualCategoryList"
+                    style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap12:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetCategoryGroupList">
+            <soap12:operation
+                    soapAction="http://Amobee.com/GetCategoryGroupList"
+                    style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap12:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="CreateAdspace">
+            <soap12:operation soapAction="http://Amobee.com/CreateAdspace"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap12:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="UpdateAdspace">
+            <soap12:operation soapAction="http://Amobee.com/UpdateAdspace"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap12:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="CreateCategory">
+            <soap12:operation soapAction="http://Amobee.com/CreateCategory"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap12:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="UpdateCategory">
+            <soap12:operation soapAction="http://Amobee.com/UpdateCategory"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap12:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="DeleteAdSpace">
+            <soap12:operation soapAction="http://Amobee.com/DeleteAdSpace"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap12:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="DeleteCategory">
+            <soap12:operation soapAction="http://Amobee.com/DeleteCategory"
+                              style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap12:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetAdSpaceSalesHouses">
+            <soap12:operation
+                    soapAction="http://Amobee.com/GetAdSpaceSalesHouses"
+                    style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CMS_API_Exception">
+                <soap12:fault name="CMS_API_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    
+    <wsdl:service name="InventoryService">
+        <wsdl:port name="Inventory" binding="tns:InventoryWSSoap">
+            <soap:address location="http://localhost/invetory"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
