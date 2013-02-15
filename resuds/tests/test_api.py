@@ -120,6 +120,11 @@ class ResudsClientTestCase(TestCase):
         self.assertTrue(res.isdigit())
 
     @httprettified
+    def testAANoneTypeObjectInRebuild(self):
+        self.setupHttpPretty('deleteAdspace')
+        self.client.DeleteAdSpace(name='', pwd='', operatorId='', adSpaceId=123456)
+
+    @httprettified
     def testComplicateCase(self):
         with open(os.path.join(LOCALDIR, 'getReport.wsdl')) as fp:
             body = fp.read()

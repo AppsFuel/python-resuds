@@ -1,0 +1,1 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns2:EmptyResponse xmlns:ns3="http://Amobee.com/" xmlns:ns2="http://Amobee.com/Common/Schema"/></soap:Body></soap:Envelope>

@@ -88,6 +88,8 @@ class SoapObject(object):
 class ElementFactory(object):
     @classmethod
     def rebuild(cls, obj):
+        if not obj:
+            return ''
         if isinstance(obj, (int, float, str)):
             return str(obj)
         if cls.is_list(obj):
