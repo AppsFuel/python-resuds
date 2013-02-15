@@ -1,1 +1,0 @@
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns3:CreateAdspaceResponse xmlns:ns3="http://Amobee.com/" xmlns:ns2="http://Amobee.com/Common/Schema"><adSpaceId>38113146</adSpaceId></ns3:CreateAdspaceResponse></soap:Body></soap:Envelope>

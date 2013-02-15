@@ -119,6 +119,37 @@ class ResudsClientTestCase(TestCase):
         res = self.client.CreateAdspace(name='', pwd='', operatorId='', Adspace=adspace)
         self.assertTrue(res.isdigit())
 
+    @httprettified
+    def testComplicateCase(self):
+        with open(os.path.join(LOCALDIR, 'getReport.wsdl')) as fp:
+            body = fp.read()
+        HTTPretty.register_uri(
+            HTTPretty.POST,
+            'http://localhost/publisher',
+            body=body,
+            status=200,
+        )
+        client = ResudsClient('file://' + os.path.join(LOCALDIR, 'PublisherRevenueWS.wsdl'), faults=False)
+        criteria = client.create('PublisherRevenueCriteria')
+        criteria.publisherid = 1234
+        criteria.adspaceid = 1234
+        criteria.startdate = 12345
+        criteria.enddate = 12345
+        rev = client.GetPublisherRevenueCSV(name='', pwd='', operatorId='', criteria=criteria)
+
+    @httprettified
+    def testObjectListWithObjectAsChild(self):
+        with open(os.path.join(LOCALDIR, 'getFlightList.wsdl')) as fp:
+            body = fp.read()
+        HTTPretty.register_uri(
+            HTTPretty.POST,
+            'http://localhost/campaign',
+            body=body,
+            status=200,
+        )
+        client = ResudsClient('file://' + os.path.join(LOCALDIR, 'CampaignWS.wsdl'))
+        l = client.GetFlightList(name='', pwd='', operatorId='')
+
     def setupHttpPretty(self, name, method=HTTPretty.POST, status_code=200):
         with open(os.path.join(LOCALDIR, name + '.wsdl')) as fp:
             body = fp.read()
