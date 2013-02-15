@@ -1,0 +1,117 @@
+<wsdl:definitions targetNamespace="http://Amobee.com/"
+	xmlns:tns="http://Amobee.com/" xmlns:cmn="http://Amobee.com/Common/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:xmime="http://www.w3.org/2005/05/xmlmime">
+	<wsdl:import namespace="http://Amobee.com/Common/"
+		location="Common.wsdl" />
+	<wsdl:types>
+		<s:schema targetNamespace="http://Amobee.com/" xmlns:cmn="http://Amobee.com/Common/Schema"
+			xmlns:s="http://www.w3.org/2001/XMLSchema">
+			<s:import namespace="http://www.w3.org/2001/XMLSchema" />
+			<s:import namespace="http://Amobee.com/Common/Schema"
+				schemaLocation="Common.xsd" />
+				
+			<s:element name="GetPublisherRevenueCSV">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="criteria" type="tns:PublisherRevenueCriteria" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+
+			<s:element name="GetPublisherRevenueCSVResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" name="CSVFile" type="tns:CSVFile" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+
+			<s:complexType name="CSVFile">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="File" type="s:hexBinary"
+						xmime:expectedContentTypes="text/plain" />
+				</s:sequence>
+			</s:complexType>
+			
+			
+			<s:complexType name="PublisherRevenueCriteria">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="publisherId" type="s:int" />
+					<s:element minOccurs="0" maxOccurs="1" name="adSpaceId" type="s:int" />
+					<s:element minOccurs="1" maxOccurs="1" name="startDate" type="s:date" />
+					<s:element minOccurs="1" maxOccurs="1" name="endDate" type="s:date" />					
+				</s:sequence>
+			</s:complexType>
+			
+
+		</s:schema>
+	</wsdl:types>
+	
+	<wsdl:message name="GetPublisherRevenueCSVSoapIn">
+		<wsdl:part name="parameters" element="tns:GetPublisherRevenueCSV" />
+	</wsdl:message>
+
+	<wsdl:message name="GetPublisherRevenueCSVSoapOut">
+		<wsdl:part name="parameters" element="tns:GetPublisherRevenueCSVResponse" />
+	</wsdl:message>
+
+	<wsdl:portType name="PublisherRevenueWSSoap">
+
+		<wsdl:operation name="GetPublisherRevenueCSV">
+			<wsdl:input message="tns:GetPublisherRevenueCSVSoapIn" />
+			<wsdl:output message="tns:GetPublisherRevenueCSVSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+
+	</wsdl:portType>
+
+	<wsdl:binding name="PublisherRevenueWSSoap" type="tns:PublisherRevenueWSSoap">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+
+		<wsdl:operation name="GetPublisherRevenueCSV">
+			<soap:operation soapAction="http://Amobee.com/GetPublisherRevenueCSV"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception">
+				<soap:fault name="CMS_API_Exception" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		
+	</wsdl:binding>
+	<wsdl:binding name="PublisherRevenueWSSoap12" type="tns:PublisherRevenueWSSoap">
+		<soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+
+		<wsdl:operation name="GetPublisherRevenueCSV">
+			<soap12:operation
+				soapAction="http://Amobee.com/GetPublisherRevenueCSV"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception">
+				<soap12:fault name="CMS_API_Exception" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		
+	</wsdl:binding>
+
+
+    <wsdl:service name="PublisherRevenueWSSoap">
+        <wsdl:port name="PublisherRevenueWSSoap" binding="tns:PublisherRevenueWSSoap">
+            <soap:address location="http://localhost/publisher"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

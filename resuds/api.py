@@ -88,8 +88,6 @@ class SoapObject(object):
 class ElementFactory(object):
     @classmethod
     def rebuild(cls, obj):
-        if not obj:
-            return ''
         if isinstance(obj, (int, float, str)):
             return str(obj)
         if cls.is_list(obj):
@@ -111,18 +109,8 @@ class ElementFactory(object):
             elif el.__class__.__name__ == 'EntityIdList':
                 setattr(soapObject, ElementFactory.clean(child), *[e[1] for e in el])
                 continue
-            elif isinstance(el, datetime.datetime):
-                setattr(soapObject, ElementFactory.clean(child), el)
-                continue
-
-            el_attrs = [el_attr for el_attr in el.__keylist__ if el_attr.startswith('_')]
-            el_children = [el_child for el_child in el.__keylist__ if not el_child.startswith('_')]
-
-            l = []
-            for child_el in el[0]:
-                l.append(ElementFactory.rebuild(child_el))
-
-            setattr(soapObject, ElementFactory.clean(child), l)
+            e = ElementFactory.rebuild(el)
+            setattr(soapObject, ElementFactory.clean(child), e)
 
         return soapObject
 

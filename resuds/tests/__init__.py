@@ -1,3 +1,3 @@
 import os
 
-LOCALDIR = os.path.dirname(__file__)
+LOCALDIR = os.path.join(os.path.dirname(__file__), 'wsdl')

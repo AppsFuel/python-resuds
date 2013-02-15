@@ -1,0 +1,1674 @@
+<wsdl:definitions targetNamespace="http://Amobee.com/"
+	xmlns:tns="http://Amobee.com/" xmlns:cmn="http://Amobee.com/Common/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+	<wsdl:import namespace="http://Amobee.com/Common/"
+		location="Common.wsdl" />
+	<wsdl:types>
+		<s:schema targetNamespace="http://Amobee.com/" xmlns:cmn="http://Amobee.com/Common/Schema"
+			xmlns:s="http://www.w3.org/2001/XMLSchema">
+			<s:import namespace="http://www.w3.org/2001/XMLSchema" />
+			<s:import namespace="http://Amobee.com/Common/Schema"
+				schemaLocation="Common.xsd" />
+			<s:element name="SearchFlightByCriteria">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="flightCriteria" type="tns:flightCriteria" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="SearchCampaignByCriteria">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="campaignCriteria" type="tns:campaignCriteria" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetFlightById">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="flightId" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetFlightByExternalId">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="externalId"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetFlightResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="Flight"
+							type="tns:Flight" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+
+			<s:element name="GetCampaignById">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="campaignId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetCampaignByExternalId">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="externalId"
+							type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetCampaignResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="Campaign"
+							type="tns:Campaign" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetCampaignList">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetCampaignListResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="CampaignList"
+							type="tns:CampaignList" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetFlightList">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="GetFlightListResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="FlightList"
+							type="tns:FlightList" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="StopFlight">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="flightId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="EndFlight">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="flightId" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="StopFlightAd">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="flightId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="flightAdId" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CommitFlight">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="flightId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ResumeFlight">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="flightId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ResumeFlightAd">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="flightId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="flightAdId" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ApproveFlight">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="flightId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="RejectFlight">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="flightId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="UpdateFlight">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="Flight"
+							type="tns:Flight" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CreateFlight">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="Flight"
+							type="tns:Flight" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CreateFlightResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="flightId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ApproveFlightAd">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="flightId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="flightAdId" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="RejectFlightAd">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="flightId" type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="flightAdId" type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ResumeCampaign">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="campaignId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="StopCampaign">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="campaignId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CommitCampaign">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="campaignId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="ArchiveCampaign">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="campaignId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+
+
+			<s:element name="CreateCampaign">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="Campaign"
+							type="tns:Campaign" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="CreateCampaignResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="campaignId"
+							type="s:int" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="UpdateCampaign">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="1" maxOccurs="1" name="name" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="pwd" type="s:string" />
+						<s:element minOccurs="1" maxOccurs="1" name="operatorId"
+							type="s:int" />
+						<s:element minOccurs="1" maxOccurs="1" name="Campaign"
+							type="tns:Campaign" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+
+
+
+
+
+
+
+			<s:complexType name="campaignCriteria">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="campaignName"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="agencyId"
+						type="s:int" />
+					<s:element minOccurs="0" maxOccurs="1" name="advertiserId"
+						type="s:int" />
+					<s:element minOccurs="0" maxOccurs="1" name="startDate"
+						type="tns:dateCriteria" />
+					<s:element minOccurs="0" maxOccurs="1" name="endDate"
+						type="tns:dateCriteria" />
+					<s:element minOccurs="0" maxOccurs="1" name="isExcludeFinished"
+						type="s:boolean" default="false" />
+					<s:element name="campaignType" type="tns:CampaignType" />
+				</s:sequence>
+
+			</s:complexType>
+			<s:complexType name="flightCriteria">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="flightName"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="campaignName"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="agencyId"
+						type="s:int" />
+					<s:element minOccurs="0" maxOccurs="1" name="advertiserId"
+						type="s:int" />
+					<s:element minOccurs="0" maxOccurs="1" name="publisherId"
+						type="s:int" />
+					<s:element minOccurs="0" maxOccurs="1" name="adspaceName"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="startDate"
+						type="tns:dateCriteria" />
+					<s:element minOccurs="0" maxOccurs="1" name="endDate"
+						type="tns:dateCriteria" />
+					<s:element minOccurs="0" maxOccurs="1" name="state"
+						type="tns:FlightStateEnum" />
+				</s:sequence>
+
+
+
+			</s:complexType>
+
+			<s:complexType name="dateCriteria">
+
+				<s:attribute name="dateRangeType" type="tns:DateRangeTypeEnum"
+					use="required" />
+				<s:attribute name="dateValue" type="s:dateTime" use="required" />
+
+			</s:complexType>
+			<s:simpleType name="DateRangeTypeEnum">
+				<s:restriction base="s:string">
+					<s:enumeration value="AFTER" />
+					<s:enumeration value="BEFORE" />
+					<s:enumeration value="ON" />
+				</s:restriction>
+			</s:simpleType>
+
+			<s:complexType name="CampaignList">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Campaign" type="tns:Campaign" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="Campaign">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="FlightIdList" type="cmn:EntityIdList" />
+					<s:element minOccurs="0" maxOccurs="1" name="TopicIdList" type="cmn:EntityIdList" />
+				</s:sequence>
+				<s:attribute name="Id" type="s:int" use="optional" />
+				<s:attribute name="ExternalId" type="s:string" use="optional" />
+				<s:attribute name="Name" type="s:string" use="required" />
+				<s:attribute name="AgencyId" type="s:int" use="required" />
+				<s:attribute name="AdvertiserId" type="s:int" use="required" />
+				<s:attribute name="AdCategoryId" type="s:int" use="optional" />
+				<s:attribute name="SalesPersonID" type="s:int" use="optional" />
+				<s:attribute name="IO" type="s:string" use="optional" />
+				<s:attribute name="PO" type="s:string" use="optional" />
+				<s:attribute name="ContactName" type="s:string" use="optional" />
+				<s:attribute name="StartDate" type="s:dateTime" use="required" />
+				<s:attribute name="EndDate" type="s:dateTime" use="required" />
+				<s:attribute name="SalesPerson" type="s:string" use="optional" />
+				<s:attribute name="CurrencyId" type="s:int" use="optional" />
+				<s:attribute name="CampaignType" type="tns:CampaignType" use="required" />
+				<s:attribute name="PricingModel" type="tns:PricingModel" use="optional" />
+				<s:attribute name="ActionEventId" type="s:int" use="optional" />
+				<s:attribute name="IsUnpaid" type="s:boolean" use="optional" />
+				<s:attribute name="ConversionRate" type="s:float" use="optional" />
+				<s:attribute name="OwnerSalesHouseID" type="s:int" use="optional" />
+			</s:complexType>
+			<s:simpleType name="CampaignType">
+				<s:restriction base="s:string">
+					<s:enumeration value="PREMIUM_GUARANTEED" />
+					<s:enumeration value="PREMIUM" />
+					<s:enumeration value="RTB" />
+					<s:enumeration value="MEDIATION" />
+					<s:enumeration value="REMNANT" />
+					<s:enumeration value="FILLER" />
+					<s:enumeration value="TENANCY" />
+				</s:restriction>
+			</s:simpleType>
+			
+			<s:simpleType name="PricingModel">
+				<s:restriction base="s:string">
+					<s:enumeration value="CPM" />
+					<s:enumeration value="CPC" />
+					<s:enumeration value="CPA" />
+					<s:enumeration value="FIXED" />
+				</s:restriction>
+			</s:simpleType>
+
+			<s:complexType name="FlightList">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="Flight"
+						type="tns:Flight" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="Flight">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="AdspaceIdList"	type="cmn:EntityIdList" />
+					<s:element minOccurs="0" maxOccurs="1" name="ExcludedAdspaceIdList"	type="cmn:EntityIdList" />
+					<s:element minOccurs="0" maxOccurs="1" name="DeviceTargeting" type="tns:DeviceTargeting"/>
+					<s:element minOccurs="0" maxOccurs="1" name="DeviceGroupTargeting" type="tns:DeviceGroupTargeting" />
+					<s:element minOccurs="0" maxOccurs="1" name="CategoryIdList" type="cmn:EntityIdList" />
+					<s:element minOccurs="0" maxOccurs="1" name="ContextualCategoryIdList" type="cmn:EntityIdList" />
+					<s:element minOccurs="1" maxOccurs="1" name="TimeTargeting" type="tns:TimeTargeting" />
+					<s:element minOccurs="0" maxOccurs="1" name="PricingInfo" type="tns:PricingInfo" />
+					<s:element minOccurs="0" maxOccurs="1" name="UserFrequencyCapList" type="tns:UserFrequencyCapList" />
+					<s:element minOccurs="0" maxOccurs="1" name="DeliveryInfo" type="tns:DeliveryInfo" />
+					<s:element minOccurs="0" maxOccurs="1" name="TargetedAttributeList" type="tns:TargetedAttributeList" />
+					<s:element minOccurs="0" maxOccurs="1" name="GeoTargetingList" type="tns:GeoTargetingList"/>
+					<s:element minOccurs="0" maxOccurs="1" name="FlightAdList" type="tns:FlightAdList" />
+				</s:sequence>
+				<s:attribute name="Id" type="s:int" use="optional" />
+				<s:attribute name="ExternalId" type="s:string" use="optional" />
+				<s:attribute name="Name" type="s:string" use="required" />
+				<s:attribute name="Comments" type="s:string" use="optional" />
+				<s:attribute name="CampaignId" type="s:int" use="required" />
+				<s:attribute name="MediaChannelId" type="s:int" use="required" />
+				<s:attribute name="FormatId" type="s:int" use="required" />
+				<s:attribute name="ResourceTypeId" type="s:int" use="optional" />
+				<s:attribute name="RunOfNetwork" type="s:boolean" use="required" />
+				<s:attribute name="State" type="tns:FlightStateEnum" use="optional" />				
+				<s:attribute name="OwnerSalesHouseID" type="s:int" use="optional" />
+				<s:attribute name="SupportCompanionFlights" type="s:boolean" use="optional" default="false" />
+				<s:attribute name="DeliveryInBatchOnly" type="s:boolean" use="optional" />
+				<s:attribute name="CompanionFlight" type="s:boolean" use="optional" />
+				<s:attribute name="CompanionFlightId" type="s:int" use="optional" />
+				<s:attribute name="PercentageWeighting" type="s:boolean" use="optional" default="false" />
+				<s:attribute name="AgencyDiscount" type="s:int" use="optional" />
+				<s:attribute name="FixedPrice" type="s:double" use="optional" />
+			</s:complexType>
+			<s:complexType name="FlightAdList">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="FlightAd" type="tns:FlightAd" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="FlightAd">
+				<s:attribute name="Id" type="s:int" use="optional" />
+				<s:attribute name="adId" type="s:int" use="required" />
+				<s:attribute name="State" type="tns:FlightAdStateEnum" use="optional" />
+				<s:attribute name="Weight" type="s:int" use="optional" />
+			</s:complexType>
+			<s:simpleType name="FlightAdStateEnum">
+				<s:restriction base="s:string">
+					<s:enumeration value="PENDING_APPROVAL"></s:enumeration>
+					<s:enumeration value="PENDING_APPROVAL_STOPPED"></s:enumeration>
+					<s:enumeration value="ACTIVE"></s:enumeration>
+					<s:enumeration value="STOPPED"></s:enumeration>
+					<s:enumeration value="REJECTED"></s:enumeration>					
+				</s:restriction>
+			</s:simpleType>
+			
+			<s:complexType name="DeviceTargeting">
+				<s:sequence>
+					<s:element minOccurs="1" maxOccurs="1" name="DeviceIdList" type="cmn:EntityIdList" />
+				</s:sequence>
+				<s:attribute name="IncludeUnknown" type="s:boolean" use="required" />
+				<s:attribute name="IsExclude" type="s:boolean" use="required" />
+			</s:complexType>
+			
+			<s:complexType name="GeoTargetingList">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="GeoTargeting" type="tns:GeoTargeting" />
+				</s:sequence>
+			</s:complexType>
+			
+			<s:complexType name="GeoTargeting">
+				<s:attribute name="Latitude" type="s:double" use="required" />
+				<s:attribute name="Longitude" type="s:double" use="required" />
+				<s:attribute name="Radius" type="s:double" use="required" />
+			</s:complexType>		
+			
+			<s:complexType name="DeviceGroupTargeting">
+				<s:sequence>
+					<s:element minOccurs="1" maxOccurs="1" name="DeviceGroupIdList" type="cmn:EntityIdList" />
+				</s:sequence>
+				<s:attribute name="IncludeUnknown" type="s:boolean" use="required" />
+				<s:attribute name="IsExclude" type="s:boolean" use="required" />
+			</s:complexType>
+			
+			<s:complexType name="TargetedAttributeList">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="TargetedAttribute" type="tns:TargetedAttribute" />
+				</s:sequence>
+			</s:complexType>
+			
+			<s:complexType name="TargetedAttribute">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="TargetedListValueIdList" type="s:int" />
+					<s:element minOccurs="0" maxOccurs="unbounded" name="TargetedRangeValueList" type="cmn:TargetedRangeValue" />
+					<s:element minOccurs="0" maxOccurs="unbounded" name="KeywordsList" type="s:string" />
+				</s:sequence>
+				<s:attribute name="IncludeUnknown" type="s:boolean" use="required" />
+				<s:attribute name="AttributeId" type="s:int" use="required" />
+				<s:attribute name="IsExclude" type="s:boolean" use="required" />
+				<s:attribute name="AttributeType" type="cmn:AttributeTypeEnum" use="required" />
+			</s:complexType>
+			<s:complexType name="UserFrequencyCapList">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="UserFrequencyCap" type="tns:UserFrequencyCap" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="UserFrequencyCap">
+				<s:attribute name="CapAmount" type="s:long" use="required" />
+				<s:attribute name="EventId" type="s:int" use="required" />
+				<s:attribute name="PeriodId" type="s:int" use="required" />
+			</s:complexType>
+			<s:simpleType name="FlightStateEnum">
+				<s:restriction base="s:string">
+					<s:enumeration value="NEW" />
+					<s:enumeration value="PENDING_APPROVAL" />
+					<s:enumeration value="PENDING_ADS" />
+					<s:enumeration value="APPROVED" />
+					<s:enumeration value="REJECTED" />
+					<s:enumeration value="ACTIVE" />
+					<s:enumeration value="STOPPED" />
+					<s:enumeration value="FINISHED" />
+				</s:restriction>
+			</s:simpleType>
+			<s:complexType name="PricingInfo">
+				<s:sequence>
+					<s:element name="DailyPricingInfo" minOccurs="0" maxOccurs="1" type="tns:DailyPricingInfo"></s:element>
+					<s:choice>
+						<s:element minOccurs="0" maxOccurs="1" name="Budget" type="s:long" />
+						<s:element minOccurs="0" maxOccurs="1" name="ServingCap" type="s:long" />
+					</s:choice>
+				</s:sequence>
+				
+				<s:attribute name="Price" type="s:float" use="optional"></s:attribute>
+				<s:attribute name="PlacementFee" type="s:int" use="optional"></s:attribute>
+				
+			</s:complexType>
+			<s:complexType name="DailyPricingInfo">
+				<s:choice>
+					<s:element minOccurs="0" maxOccurs="1" name="DailyBudget" type="s:long" />
+					<s:element minOccurs="0" maxOccurs="1" name="DailyServingCap" type="s:long" />
+				</s:choice>
+			</s:complexType>
+
+			<s:complexType name="TimeTargeting">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="TimeTargetingValueList" type="tns:TimeTargetingValueList" />
+				</s:sequence>
+				<s:attribute name="StartDate" type="s:dateTime" use="required" />
+				<s:attribute name="EndDate" type="s:dateTime" use="required" />
+			</s:complexType>
+			<s:complexType name="DeliveryInfo">
+				<s:attribute name="DeliveryModeName" type="tns:DeliveryModeNameEnum" use="optional" />
+				<s:attribute name="Priority" type="tns:PriorityClassEnum" use="optional" />
+			</s:complexType>
+			<s:simpleType name="DeliveryModeNameEnum">
+				<s:restriction base="s:string">
+					<s:enumeration value="ASAP_DAILY" />
+					<s:enumeration value="ASAP" />
+					<s:enumeration value="EVEN" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="PriorityClassEnum">
+				<s:restriction base="s:string">
+					<s:enumeration value="VERY_LOW" />
+					<s:enumeration value="LOW" />
+					<s:enumeration value="NORMAL_LOW" />
+					<s:enumeration value="NORMAL" />
+					<s:enumeration value="NORMAL_HIGH" />
+					<s:enumeration value="HIGH" />
+					<s:enumeration value="HIGHEST" />
+				</s:restriction>
+			</s:simpleType>
+			<s:complexType name="TimeTargetingValueList">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="TimeTargetingValue" type="tns:TimeTargetingValue" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="TimeTargetingValue">
+				<s:attribute name="DayOfWeek" type="tns:DayOfWeek" use="required" />
+				<s:attribute name="FromHour" type="tns:DistributionHour" use="required" />
+				<s:attribute name="ToHour" type="tns:DistributionHour" use="required" />
+				<s:attribute name="FromMinute" type="tns:DistributionMinute" use="required" />
+				<s:attribute name="ToMinute" type="tns:DistributionMinute" use="required" />
+			</s:complexType>
+			<s:simpleType name="DistributionHour">
+				<s:restriction base="s:int">
+					<s:minInclusive value="0" />
+					<s:maxInclusive value="24" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="DistributionMinute">
+				<s:restriction base="s:int">
+					<s:minInclusive value="0" />
+					<s:maxInclusive value="59" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="DayOfWeek">
+				<s:restriction base="s:string">
+					<s:enumeration value="EVERYDAY" />
+					<s:enumeration value="SUNDAY" />
+					<s:enumeration value="MONDAY" />
+					<s:enumeration value="TUESDAY" />
+					<s:enumeration value="WEDNESDAY" />
+					<s:enumeration value="THURSDAY" />
+					<s:enumeration value="FRIDAY" />
+					<s:enumeration value="SATURDAY" />
+				</s:restriction>
+			</s:simpleType>
+		</s:schema>
+	</wsdl:types>
+
+
+	<!-- GetCampaignList -->
+	<wsdl:message name="GetCampaignListSoapIn">
+		<wsdl:part name="parameters" element="tns:GetCampaignList" />
+	</wsdl:message>
+	<wsdl:message name="GetCampaignListSoapOut">
+		<wsdl:part name="parameters" element="tns:GetCampaignListResponse" />
+	</wsdl:message>
+
+	<!--  GetFlightList -->
+	<wsdl:message name="GetFlightListSoapIn">
+		<wsdl:part name="parameters" element="tns:GetFlightList" />
+	</wsdl:message>
+	<wsdl:message name="GetFlightListSoapOut">
+		<wsdl:part name="parameters" element="tns:GetFlightListResponse" />
+	</wsdl:message>
+
+	<!-- GetCampaign -->
+	<wsdl:message name="GetCampaignByIdSoapIn">
+		<wsdl:part name="parameters" element="tns:GetCampaignById" />
+	</wsdl:message>
+	<wsdl:message name="GetCampaignByExternalIdSoapIn">
+		<wsdl:part name="parameters" element="tns:GetCampaignByExternalId" />
+	</wsdl:message>
+	<wsdl:message name="GetCampaignSoapOut">
+		<wsdl:part name="parameters" element="tns:GetCampaignResponse" />
+	</wsdl:message>
+
+	<!-- GetFlight -->
+	<wsdl:message name="GetFlightByIdSoapIn">
+		<wsdl:part name="parameters" element="tns:GetFlightById" />
+	</wsdl:message>
+	<wsdl:message name="GetFlightByExternalIdSoapIn">
+		<wsdl:part name="parameters" element="tns:GetFlightByExternalId" />
+	</wsdl:message>
+	<wsdl:message name="GetFlightSoapOut">
+		<wsdl:part name="parameters" element="tns:GetFlightResponse" />
+	</wsdl:message>
+	<wsdl:message name="SearchFlightByCriteriaSoapIn">
+		<wsdl:part name="parameters" element="tns:SearchFlightByCriteria" />
+	</wsdl:message>
+	<wsdl:message name="SearchCampaignByCriteriaSoapIn">
+		<wsdl:part name="parameters" element="tns:SearchCampaignByCriteria" />
+	</wsdl:message>
+
+	<!-- CreateCampaign -->
+	<wsdl:message name="CreateCampaignSoapIn">
+		<wsdl:part name="parameters" element="tns:CreateCampaign" />
+	</wsdl:message>
+	<wsdl:message name="CreateCampaignSoapOut">
+		<wsdl:part name="parameters" element="tns:CreateCampaignResponse" />
+	</wsdl:message>
+	<!-- UpdateCampaign -->
+	<wsdl:message name="UpdateCampaignSoapIn">
+		<wsdl:part name="parameters" element="tns:UpdateCampaign" />
+	</wsdl:message>
+	<!-- StopCampaign -->
+	<wsdl:message name="StopCampaignSoapIn">
+		<wsdl:part name="parameters" element="tns:StopCampaign" />
+	</wsdl:message>
+	<wsdl:message name="CommitCampaignSoapIn">
+		<wsdl:part name="parameters" element="tns:CommitCampaign" />
+	</wsdl:message>
+	<!-- ResumeCampaign -->
+	<wsdl:message name="ResumeCampaignSoapIn">
+		<wsdl:part name="parameters" element="tns:ResumeCampaign" />
+	</wsdl:message>
+	<!-- ArchiveCampaign -->
+	<wsdl:message name="ArchiveCampaignSoapIn">
+		<wsdl:part name="parameters" element="tns:ArchiveCampaign" />
+	</wsdl:message>
+	<!-- CreateFlight -->
+	<wsdl:message name="CreateFlightSoapIn">
+		<wsdl:part name="parameters" element="tns:CreateFlight" />
+	</wsdl:message>
+	<wsdl:message name="CreateFlightSoapOut">
+		<wsdl:part name="parameters" element="tns:CreateFlightResponse" />
+	</wsdl:message>
+	<!-- UpdateFlight -->
+	<wsdl:message name="UpdateFlightSoapIn">
+		<wsdl:part name="parameters" element="tns:UpdateFlight" />
+	</wsdl:message>
+	<!-- StopFlight -->
+	<wsdl:message name="StopFlightSoapIn">
+		<wsdl:part name="parameters" element="tns:StopFlight" />
+	</wsdl:message>
+	<!-- StopFlightAd -->
+	<wsdl:message name="StopFlightAdSoapIn">
+		<wsdl:part name="parameters" element="tns:StopFlightAd" />
+	</wsdl:message>
+	<!-- StopFlight -->
+	<wsdl:message name="EndFlightSoapIn">
+		<wsdl:part name="parameters" element="tns:EndFlight" />
+	</wsdl:message>
+	<!-- CommitFlight -->
+	<wsdl:message name="CommitFlightSoapIn">
+		<wsdl:part name="parameters" element="tns:CommitFlight" />
+	</wsdl:message>
+	<!-- ResumeFlight -->
+	<wsdl:message name="ResumeFlightSoapIn">
+		<wsdl:part name="parameters" element="tns:ResumeFlight" />
+	</wsdl:message>
+	<!-- ResumeFlightAd -->
+	<wsdl:message name="ResumeFlightAdSoapIn">
+		<wsdl:part name="parameters" element="tns:ResumeFlightAd" />
+	</wsdl:message>
+	<!-- ApproveFlight -->
+	<wsdl:message name="ApproveFlightSoapIn">
+		<wsdl:part name="parameters" element="tns:ApproveFlight" />
+	</wsdl:message>
+	<!-- RejectFlight -->
+	<wsdl:message name="RejectFlightSoapIn">
+		<wsdl:part name="parameters" element="tns:RejectFlight" />
+	</wsdl:message>
+	<!-- ApproveFlightAd -->
+	<wsdl:message name="ApproveFlightAdSoapIn">
+		<wsdl:part name="parameters" element="tns:ApproveFlightAd" />
+	</wsdl:message>
+	<!-- RejectFlightAd -->
+	<wsdl:message name="RejectFlightAdSoapIn">
+		<wsdl:part name="parameters" element="tns:RejectFlightAd" />
+	</wsdl:message>
+
+
+	<!-- Port Types  -->
+	<wsdl:portType name="CampaignWSSoap">
+		<wsdl:operation name="GetCampaignList">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:GetCampaignListSoapIn" />
+			<wsdl:output message="tns:GetCampaignListSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+
+		</wsdl:operation>
+
+		<wsdl:operation name="GetFlightList">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:GetFlightListSoapIn" />
+			<wsdl:output message="tns:GetFlightListSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+
+		</wsdl:operation>
+		<wsdl:operation name="GetCampaignById">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:GetCampaignByIdSoapIn" />
+			<wsdl:output message="tns:GetCampaignSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+
+		</wsdl:operation>
+		<wsdl:operation name="GetCampaignByExternalId">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:GetCampaignByExternalIdSoapIn" />
+			<wsdl:output message="tns:GetCampaignSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+
+		</wsdl:operation>
+		<wsdl:operation name="GetFlightById">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:GetFlightByIdSoapIn" />
+			<wsdl:output message="tns:GetFlightSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+
+		</wsdl:operation>
+		<wsdl:operation name="GetFlightByExternalId">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:GetFlightByExternalIdSoapIn" />
+			<wsdl:output message="tns:GetFlightSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+
+		</wsdl:operation>
+		<wsdl:operation name="SearchFlightByCriteria">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:SearchFlightByCriteriaSoapIn" />
+			<wsdl:output message="tns:GetFlightListSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+
+		</wsdl:operation>
+		<wsdl:operation name="SearchCampaignByCriteria">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:SearchCampaignByCriteriaSoapIn" />
+			<wsdl:output message="tns:GetCampaignListSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+
+		</wsdl:operation>
+		<wsdl:operation name="CreateCampaign">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:CreateCampaignSoapIn" />
+			<wsdl:output message="tns:CreateCampaignSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+		<wsdl:operation name="UpdateCampaign">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:UpdateCampaignSoapIn" />
+			<wsdl:output message="cmn:EmptyResponseSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+		<wsdl:operation name="StopCampaign">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:StopCampaignSoapIn" />
+			<wsdl:output message="cmn:EmptyResponseSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+		<wsdl:operation name="CommitCampaign">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:CommitCampaignSoapIn" />
+			<wsdl:output message="cmn:EmptyResponseSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+		<wsdl:operation name="ResumeCampaign">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:ResumeCampaignSoapIn" />
+			<wsdl:output message="cmn:EmptyResponseSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+		<wsdl:operation name="ArchiveCampaign">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:ArchiveCampaignSoapIn" />
+			<wsdl:output message="cmn:EmptyResponseSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+		<wsdl:operation name="CreateFlight">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:CreateFlightSoapIn" />
+			<wsdl:output message="tns:CreateFlightSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+		<wsdl:operation name="UpdateFlight">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:UpdateFlightSoapIn" />
+			<wsdl:output message="cmn:EmptyResponseSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+		<wsdl:operation name="StopFlight">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:StopFlightSoapIn" />
+			<wsdl:output message="cmn:EmptyResponseSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+		<wsdl:operation name="StopFlightAd">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:StopFlightAdSoapIn" />
+			<wsdl:output message="cmn:EmptyResponseSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+		<wsdl:operation name="EndFlight">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:EndFlightSoapIn" />
+			<wsdl:output message="cmn:EmptyResponseSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+		<wsdl:operation name="CommitFlight">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:CommitFlightSoapIn" />
+			<wsdl:output message="cmn:EmptyResponseSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+		<wsdl:operation name="ResumeFlight">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:ResumeFlightSoapIn" />
+			<wsdl:output message="cmn:EmptyResponseSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+		<wsdl:operation name="ResumeFlightAd">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:ResumeFlightAdSoapIn" />
+			<wsdl:output message="cmn:EmptyResponseSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+		<wsdl:operation name="ApproveFlight">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:ApproveFlightSoapIn" />
+			<wsdl:output message="cmn:EmptyResponseSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+
+		<wsdl:operation name="RejectFlight">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:RejectFlightSoapIn" />
+			<wsdl:output message="cmn:EmptyResponseSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+		<wsdl:operation name="ApproveFlightAd">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:ApproveFlightAdSoapIn" />
+			<wsdl:output message="cmn:EmptyResponseSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+		<wsdl:operation name="RejectFlightAd">
+			<wsdl:documentation></wsdl:documentation>
+			<wsdl:input message="tns:RejectFlightAdSoapIn" />
+			<wsdl:output message="cmn:EmptyResponseSoapOut" />
+			<wsdl:fault name="CMS_API_Exception" message="cmn:CMS_API_Exception" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="CampaignWSSoap" type="tns:CampaignWSSoap">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="SearchFlightByCriteria">
+			<soap:operation soapAction="http://Amobee.com/SearchFlightByCriteria"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SearchCampaignByCriteria">
+			<soap:operation soapAction="http://Amobee.com/SearchCampaignByCriteria"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetCampaignList">
+			<soap:operation soapAction="http://Amobee.com/GetCampaignList"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetFlightList">
+			<soap:operation soapAction="http://Amobee.com/GetFlightList"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetCampaignById">
+			<soap:operation soapAction="http://Amobee.com/GetCampaignById"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetCampaignByExternalId">
+			<soap:operation soapAction="http://Amobee.com/GetCampaignByExternalId"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetFlightById">
+			<soap:operation soapAction="http://Amobee.com/GetFlightById"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetFlightByExternalId">
+			<soap:operation soapAction="http://Amobee.com/GetFlightByExternalId"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<!--  Write methods  -->
+
+		<!-- Campaign -->
+		<wsdl:operation name="CreateCampaign">
+			<soap:operation soapAction="http://Amobee.com/CreateCampaign"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateCampaign">
+			<soap:operation soapAction="http://Amobee.com/UpdateCampaign"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="StopCampaign">
+			<soap:operation soapAction="http://Amobee.com/StopCampaign"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CommitCampaign">
+			<soap:operation soapAction="http://Amobee.com/CommitCampaign"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ResumeCampaign">
+			<soap:operation soapAction="http://Amobee.com/ResumeCampaign"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ArchiveCampaign">
+			<soap:operation soapAction="http://Amobee.com/ArchiveCampaign"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+
+
+
+		<!-- Flight -->
+		<wsdl:operation name="CreateFlight">
+			<soap:operation soapAction="http://Amobee.com/CreateFlight"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateFlight">
+			<soap:operation soapAction="http://Amobee.com/UpdateFlight"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="StopFlight">
+			<soap:operation soapAction="http://Amobee.com/StopFlight"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="StopFlightAd">
+			<soap:operation soapAction="http://Amobee.com/StopFlightAd" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="EndFlight">
+			<soap:operation soapAction="http://Amobee.com/EndFlight" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CommitFlight">
+			<soap:operation soapAction="http://Amobee.com/CommitFlight"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ResumeFlight">
+			<soap:operation soapAction="http://Amobee.com/ResumeFlight"	style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ResumeFlightAd">
+			<soap:operation soapAction="http://Amobee.com/ResumeFlightAd"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ApproveFlight">
+			<soap:operation soapAction="http://Amobee.com/ApproveFlight"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="RejectFlight">
+			<soap:operation soapAction="http://Amobee.com/RejectFlight"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ApproveFlightAd">
+			<soap:operation soapAction="http://Amobee.com/ApproveFlightAd"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="RejectFlightAd">
+			<soap:operation soapAction="http://Amobee.com/RejectFlightAd"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="CampaignWSSoap12" type="tns:CampaignWSSoap">
+		<soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="SearchFlightByCriteria">
+			<soap12:operation soapAction="http://Amobee.com/SearchFlightByCriteria"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<wsdl:operation name="SearchCampaignByCriteria">
+			<soap12:operation soapAction="http://Amobee.com/SearchCampaignByCriteria"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetCampaignList">
+			<soap12:operation soapAction="http://Amobee.com/GetCampaignList"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetFlightList">
+			<soap12:operation soapAction="http://Amobee.com/GetFlightList"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetCampaignById">
+			<soap12:operation soapAction="http://Amobee.com/GetCampaignById"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetCampaignByExternalId">
+			<soap12:operation soapAction="http://Amobee.com/GetCampaignByExternalId"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetFlightById">
+			<soap12:operation soapAction="http://Amobee.com/GetFlightById" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetFlightByExternalId">
+			<soap12:operation soapAction="http://Amobee.com/GetFlightByExternalId" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		
+		<!--Write methods-->
+
+		<!-- Campaign -->
+		<wsdl:operation name="CreateCampaign">
+			<soap12:operation soapAction="http://Amobee.com/CreateCampaign" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateCampaign">
+			<soap12:operation soapAction="http://Amobee.com/UpdateCampaign"	style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="StopCampaign">
+			<soap12:operation soapAction="http://Amobee.com/StopCampaign" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CommitCampaign">
+			<soap12:operation soapAction="http://Amobee.com/CommitCampaign" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ResumeCampaign">
+			<soap12:operation soapAction="http://Amobee.com/ResumeCampaign"	style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ArchiveCampaign">
+			<soap12:operation soapAction="http://Amobee.com/ArchiveCampaign"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+
+		<!-- Flight -->
+		<wsdl:operation name="CreateFlight">
+			<soap12:operation soapAction="http://Amobee.com/CreateFlight"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateFlight">
+			<soap12:operation soapAction="http://Amobee.com/UpdateFlight"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="StopFlight">
+			<soap12:operation soapAction="http://Amobee.com/StopFlight"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="StopFlightAd">
+			<soap12:operation soapAction="http://Amobee.com/StopFlightAd"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="EndFlight">
+			<soap12:operation soapAction="http://Amobee.com/EndFlight" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CommitFlight">
+			<soap12:operation soapAction="http://Amobee.com/CommitFlight"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ResumeFlight">
+			<soap12:operation soapAction="http://Amobee.com/ResumeFlight" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ResumeFlightAd">
+			<soap12:operation soapAction="http://Amobee.com/ResumeFlightAd" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ApproveFlight">
+			<soap12:operation soapAction="http://Amobee.com/ApproveFlight" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ApproveFlightAd">
+			<soap12:operation soapAction="http://Amobee.com/ApproveFlightAd" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="RejectFlight">
+			<soap12:operation soapAction="http://Amobee.com/RejectFlight" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="RejectFlightAd">
+			<soap12:operation soapAction="http://Amobee.com/RejectFlightAd" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="CMS_API_Exception" >
+				<soap12:fault name="CMS_API_Exception" use="literal"/>	
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+    <wsdl:service name="CampaignService">
+        <wsdl:port name="Campaign" binding="tns:CampaignWSSoap">
+            <soap:address location="http://localhost/campaign"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
