@@ -36,6 +36,3 @@ __doc__ = """
 :date: 2013-01-28
 :copyright: %s
 """ % (__version__, __author__, __license__)
-
-from suds import WebFault
-from suds.cache import *
