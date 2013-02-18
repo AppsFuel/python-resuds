@@ -120,7 +120,7 @@ class ResudsClientTestCase(TestCase):
         self.assertTrue(res.isdigit())
 
     @httprettified
-    def testAANoneTypeObjectInRebuild(self):
+    def testNoneTypeObjectInRebuild(self):
         self.setupHttpPretty('deleteAdspace')
         self.client.DeleteAdSpace(name='', pwd='', operatorId='', adSpaceId=123456)
 
