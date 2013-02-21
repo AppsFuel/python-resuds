@@ -136,7 +136,7 @@ class ElementFactory(object):
 
     @classmethod
     def create_object(cls, factory, obj):
-        if isinstance(obj, (int, float, str)):
+        if not hasattr(obj, 'cls_name'):
             return str(obj)
         soap = factory.create(obj.cls_name)
         for key in obj.attribute_keys:
