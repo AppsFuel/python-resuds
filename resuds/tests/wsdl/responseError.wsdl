@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <soap:Fault>
+         <faultcode>soap:Server</faultcode>
+         <faultstring>EXTERNAL_ID_TOO_LONG [50]</faultstring>
+         <detail>
+            <ns2:CMS_Error xmlns:ns2="http://Amobee.com/Common/Schema" xmlns:ns3="http://Amobee.com/" userName="AppsFuelWeb" operatorId="35062658" errorCode="VE264" errorDescription="EXTERNAL_ID_TOO_LONG [50]"/>
+         </detail>
+      </soap:Fault>
+   </soap:Body>
+</soap:Envelope>

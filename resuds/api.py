@@ -4,7 +4,14 @@ from suds.sax.text import Text as SoapText
 
 __all__ = (
     'ResudsClient',
+    'SoapException',
 )
+
+
+class SoapException(Exception):
+    def __init__(self, fault):
+        super(Exception, self).__init__(fault.cms_error.errordescription)
+        self.fault = fault
 
 
 class ResudsClient(object):
@@ -41,16 +48,22 @@ class ResudsClient(object):
 
     def create_function(self, method, name):
         def func(**kwargs):
-            args = self.create_args(method, kwargs)
-            res = getattr(self.client.service, name)(*args)
-            if isinstance(res, RequestContext):
-                return res
-            elif res.__class__ is not tuple:
-                return ElementFactory.rebuild(res)
-            code, soap = res
-            if code / 100 != 2:
-                raise WebFault(code, soap)
-            return ElementFactory.rebuild(soap)
+            try:
+                args = self.create_args(method, kwargs)
+                res = getattr(self.client.service, name)(*args)
+                print 'res', res
+                if isinstance(res, RequestContext):
+                    return res
+                elif res.__class__ is not tuple:
+                    return ElementFactory.rebuild(res)
+                code, soap = res
+                if code / 100 != 2:
+                    raise WebFault(soap, code)
+                return ElementFactory.rebuild(soap)
+            except WebFault, e:
+                print 'e', e
+                obj = ElementFactory.rebuild(e.fault)
+                raise SoapException(obj)
         func.__name__ = name
         return func
 
@@ -94,6 +107,8 @@ class ElementFactory(object):
             return str(obj)
         if cls.is_list(obj):
             return [ElementFactory.rebuild(o) for o in obj[0]]
+        if not hasattr(obj, '__keylist__'):
+            return str(obj)
 
         attrs = [attr for attr in obj.__keylist__ if attr.startswith('_')]
         children = [child for child in obj.__keylist__ if not child.startswith('_')]

@@ -1,8 +1,8 @@
 import os
-from unittest import TestCase
+from unittest import TestCase, skip
 from httpretty import HTTPretty, httprettified
 from suds.client import RequestContext, WebFault
-from resuds.api import ResudsClient
+from resuds.api import ResudsClient, SoapException
 from resuds.tests import LOCALDIR
 
 
@@ -154,6 +154,26 @@ class ResudsClientTestCase(TestCase):
         )
         client = ResudsClient('file://' + os.path.join(LOCALDIR, 'CampaignWS.wsdl'))
         l = client.GetFlightList(name='', pwd='', operatorId='')
+
+    @httprettified
+    def testAAAResponseErrorOnCreate(self):
+        self.setupHttpPretty('responseError', status_code=500)
+        client = ResudsClient(ResudsClientTestCase.wsdl_file, faults=True)
+        adspace = client.create('Adspace')
+        adspace.externalid = '1' * 200
+        adspace.name = 'adspaceName'
+        adspace.longtail = True
+        adspace.mediachannelid = 2
+        adspace.publisherid = ''
+        frt = self.client.create('FormatResourceType')
+        frt.formatid = 300
+        adspace.formatresourcetypelist = [frt, ]
+
+        try:
+            res = self.client.CreateAdspace(name='', pwd='', operatorId='', Adspace=adspace)
+            self.fail('Expect failing on create a adspace with too long externalid')
+        except SoapException, e:
+            self.assertEquals(e.message, u'EXTERNAL_ID_TOO_LONG [50]')
 
     def setupHttpPretty(self, name, method=HTTPretty.POST, status_code=200):
         with open(os.path.join(LOCALDIR, name + '.wsdl')) as fp:
