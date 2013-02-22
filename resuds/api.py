@@ -12,6 +12,7 @@ __all__ = (
 
 class SoapException(Exception):
     def __init__(self, fault):
+        print fault
         desc = fault.cms_error.errordescription if hasattr(fault.cms_error, 'errordescription') else ''
         super(Exception, self).__init__(desc)
         self.fault = fault
@@ -54,19 +55,17 @@ class ResudsClient(object):
             try:
                 args = self.create_args(method, kwargs)
                 res = self.call_function(name, *args)
-                print 'res', res
                 if isinstance(res, RequestContext):
                     return res
                 elif res.__class__ is not tuple:
                     return Factory.rebuild(res)
                 code, soap = res
                 if code / 100 != 2:
-                    raise WebFault(soap, code)
+                    raise SoapException(Factory.rebuild(soap))
                 return Factory.rebuild(soap)
             except WebFault, e:
-                print 'e', e
                 obj = Factory.rebuild(e.fault)
-                raise SoapException(obj)
+                raise SoapException(obj.detail)
         func.__name__ = name
         return func
 

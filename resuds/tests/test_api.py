@@ -56,9 +56,9 @@ class ResudsClientTestCase(TestCase):
         self.assertEquals(res.cls_name, 'Adspace')
 
     @httprettified
-    def testWebFaultExceptionOnHttpError(self):
+    def testAAAWebFaultExceptionOnHttpError(self):
         self.setupHttpPretty('InvalidGetAdSpaceById', status_code=500)
-        client = ResudsClient(ResudsClientTestCase.wsdl_file, faults=False)
+        client = ResudsClient(ResudsClientTestCase.wsdl_file, faults=True)
         adspace_id = 1234567890
         self.assertRaises(SoapException, client.GetAdSpaceById, name='', pwd='', operatorId='', adSpaceId=adspace_id)
 
