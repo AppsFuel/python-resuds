@@ -1,5 +1,4 @@
-from suds.client import RequestContext, WebFault
-from resuds.api import ResudsClient, ElementFactory
+from resuds.api import ResudsClient
 
 __all__ = (
     'AmobeeClient',
@@ -21,17 +20,5 @@ class AmobeeClient(ResudsClient):
         for el in self.client.sd[0].ports[0][1]:
             self.methods[str(el[0])] = [(str(t[0]), str(t[1].type[0])) for t in el[1][3:]]
 
-    def create_function(self, method, name):
-        def func(**kwargs):
-            args = self.create_args(method, kwargs)
-            res = getattr(self.client.service, name)(self.user, self.password, self.operator_id, *args)
-            if isinstance(res, RequestContext):
-                return res
-            elif res.__class__ is not tuple:
-                return ElementFactory.rebuild(res)
-            code, soap = res
-            if code / 100 != 2:
-                raise WebFault(code, soap)
-            return ElementFactory.rebuild(soap)
-        func.__name__ = name
-        return func
+    def call_function(self, name, *args):
+        return getattr(self.client.service, name)(self.user, self.password, self.operator_id, *args)

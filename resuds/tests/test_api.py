@@ -1,7 +1,7 @@
 import os
-from unittest import TestCase, skip
+from unittest import TestCase
 from httpretty import HTTPretty, httprettified
-from suds.client import RequestContext, WebFault
+from suds.client import RequestContext
 from resuds.api import ResudsClient, SoapException
 from resuds.tests import LOCALDIR
 
@@ -9,29 +9,10 @@ from resuds.tests import LOCALDIR
 class ResudsClientTestCase(TestCase):
     wsdl_file = 'file://' + os.path.join(LOCALDIR, 'inventory.wsdl')
 
+    @httprettified
     def setUp(self):
+        self.setupDefaultSchemas()
         self.client = ResudsClient(ResudsClientTestCase.wsdl_file, faults=False)
-
-    def testCreateAdspaceSoapObject(self):
-        adspace = self.client.create('Adspace')
-        self.assertEquals(adspace.cls_name, 'Adspace')
-        self.assertEquals(
-            repr(
-                adspace), "Adspace({'estdailyusers': 1, 'minallowedcpm': '', 'description': '', 'placementheight': '', 'allowcompanionflights': '', 'placementwidth': '', 'mediachannelid': '', 'longtail': '', 'estdailyimps': 1, 'test': false, 'externalid': '', 'active': '', 'supportconvtracking': false, 'publisherid': '', 'id': '', 'minallowedcpc': '', 'name': ''}, {'excludedtopicidlist': [], 'formatresourcetypelist': [], 'categoryidlist': []})"
-        )
-
-    def testGetUnexistentProperty(self):
-        adspace = self.client.create('Adspace')
-        self.assertRaises(AttributeError, getattr, adspace, 'dummy')
-
-    def testSetUnexistentProperty(self):
-        adspace = self.client.create('Adspace')
-        self.assertRaises(AttributeError, setattr, adspace, 'dummy', 'dummyvalue')
-
-    def testChangeObjectProperty(self):
-        adspace = self.client.create('Adspace')
-        adspace.description = "new Description"
-        self.assertEquals(adspace.description, 'new Description')
 
     def testGetMethods(self):
         self.assertEquals(
@@ -56,22 +37,12 @@ class ResudsClientTestCase(TestCase):
             }
         )
 
-    def testAddListToObject(self):
-        adspace = self.client.create('Adspace')
-        frt = self.client.create('FormatResourceType', formatid=5, resourcetypeidlist=[5, 6, ])
-        frtl = [frt, ]
-        adspace.formatresourcetypelist = frtl
-        self.assertEquals(
-            adspace.formatresourcetypelist[0].formatid, 5
-        )
-        self.assertEquals(
-            adspace.formatresourcetypelist[0].resourcetypeidlist, [5, 6, ]
-        )
-
     def testUnexistentMethod(self):
         self.assertRaises(NotImplementedError, getattr, self.client, 'unexistentMethod')
 
+    @httprettified
     def testNoSendRequest(self):
+        self.setupDefaultSchemas()
         client = ResudsClient(ResudsClientTestCase.wsdl_file, nosend=True)
         res = client.GetAdSpaceList(name='', pwd='', operatorId='')
         self.assertEquals(res.__class__, RequestContext)
@@ -89,7 +60,7 @@ class ResudsClientTestCase(TestCase):
         self.setupHttpPretty('InvalidGetAdSpaceById', status_code=500)
         client = ResudsClient(ResudsClientTestCase.wsdl_file, faults=False)
         adspace_id = 1234567890
-        self.assertRaises(WebFault, client.GetAdSpaceById, name='', pwd='', operatorId='', adSpaceId=adspace_id)
+        self.assertRaises(SoapException, client.GetAdSpaceById, name='', pwd='', operatorId='', adSpaceId=adspace_id)
 
     @httprettified
     def testGetObjectList(self):
@@ -126,6 +97,7 @@ class ResudsClientTestCase(TestCase):
 
     @httprettified
     def testComplicateCase(self):
+        self.setupDefaultSchemas()
         with open(os.path.join(LOCALDIR, 'getReport.wsdl')) as fp:
             body = fp.read()
         HTTPretty.register_uri(
@@ -144,6 +116,7 @@ class ResudsClientTestCase(TestCase):
 
     @httprettified
     def testObjectListWithObjectAsChild(self):
+        self.setupDefaultSchemas()
         with open(os.path.join(LOCALDIR, 'getFlightList.wsdl')) as fp:
             body = fp.read()
         HTTPretty.register_uri(
@@ -156,7 +129,7 @@ class ResudsClientTestCase(TestCase):
         l = client.GetFlightList(name='', pwd='', operatorId='')
 
     @httprettified
-    def testAAAResponseErrorOnCreate(self):
+    def testResponseErrorOnCreate(self):
         self.setupHttpPretty('responseError', status_code=500)
         client = ResudsClient(ResudsClientTestCase.wsdl_file, faults=True)
         adspace = client.create('Adspace')
@@ -176,6 +149,7 @@ class ResudsClientTestCase(TestCase):
             self.assertEquals(e.message, u'EXTERNAL_ID_TOO_LONG [50]')
 
     def setupHttpPretty(self, name, method=HTTPretty.POST, status_code=200):
+        self.setupDefaultSchemas()
         with open(os.path.join(LOCALDIR, name + '.wsdl')) as fp:
             body = fp.read()
         HTTPretty.register_uri(
@@ -184,3 +158,12 @@ class ResudsClientTestCase(TestCase):
             body=body,
             status=status_code,
         )
+
+    def setupDefaultSchemas(self):
+        with open(os.path.join(LOCALDIR, 'XMLSchema.xsd')) as fp:
+            body = fp.read()
+        HTTPretty.register_uri(HTTPretty.GET, 'http://www.w3.org/2001/XMLSchema.xsd', body=body)
+
+        with open(os.path.join(LOCALDIR, 'xml.xsd')) as fp:
+            body = fp.read()
+        HTTPretty.register_uri(HTTPretty.GET, 'http://www.w3.org/2001/xml.xsd', body=body)

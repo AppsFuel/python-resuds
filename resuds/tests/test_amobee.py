@@ -1,7 +1,7 @@
 import os
 from unittest import TestCase
 from httpretty import HTTPretty, httprettified
-from suds.client import WebFault
+from resuds.api import SoapException
 from resuds.amobee import AmobeeClient
 from resuds.tests import LOCALDIR
 
@@ -9,7 +9,9 @@ from resuds.tests import LOCALDIR
 class AmobeeClientTestCase(TestCase):
     wsdl_file = 'file://' + os.path.join(LOCALDIR, 'inventory.wsdl')
 
+    @httprettified
     def testCredential(self):
+        self.setupDefaultSchemas()
         client = AmobeeClient(AmobeeClientTestCase.wsdl_file, 'user', 'password', 'operator_id', nosend=True)
         req = client.GetAdSpaceById(adSpaceId=1234567)
         xml = req.envelope
@@ -31,7 +33,7 @@ class AmobeeClientTestCase(TestCase):
         self.setupHttpPretty('InvalidGetAdSpaceById', status_code=500)
         client = AmobeeClient(AmobeeClientTestCase.wsdl_file, 'user', 'password', 'operator_id', faults=False)
         adspace_id = 1234567890
-        self.assertRaises(WebFault, client.GetAdSpaceById, name='', pwd='', operatorId='', adSpaceId=adspace_id)
+        self.assertRaises(SoapException, client.GetAdSpaceById, name='', pwd='', operatorId='', adSpaceId=adspace_id)
 
     @httprettified
     def testGetObject(self):
@@ -50,3 +52,13 @@ class AmobeeClientTestCase(TestCase):
             body=body,
             status=status_code,
         )
+        self.setupDefaultSchemas()
+
+    def setupDefaultSchemas(self):
+        with open(os.path.join(LOCALDIR, 'XMLSchema.xsd')) as fp:
+            body = fp.read()
+        HTTPretty.register_uri(HTTPretty.GET, 'http://www.w3.org/2001/XMLSchema.xsd', body=body)
+
+        with open(os.path.join(LOCALDIR, 'xml.xsd')) as fp:
+            body = fp.read()
+        HTTPretty.register_uri(HTTPretty.GET, 'http://www.w3.org/2001/xml.xsd', body=body)
