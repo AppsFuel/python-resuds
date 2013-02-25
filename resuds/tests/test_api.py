@@ -56,7 +56,7 @@ class ResudsClientTestCase(TestCase):
         self.assertEquals(res.cls_name, 'Adspace')
 
     @httprettified
-    def testAAAWebFaultExceptionOnHttpError(self):
+    def testWebFaultExceptionOnHttpError(self):
         self.setupHttpPretty('InvalidGetAdSpaceById', status_code=500)
         client = ResudsClient(ResudsClientTestCase.wsdl_file, faults=True)
         adspace_id = 1234567890
@@ -131,7 +131,7 @@ class ResudsClientTestCase(TestCase):
     @httprettified
     def testResponseErrorOnCreate(self):
         self.setupHttpPretty('responseError', status_code=500)
-        client = ResudsClient(ResudsClientTestCase.wsdl_file, faults=True)
+        client = ResudsClient(ResudsClientTestCase.wsdl_file)
         adspace = client.create('Adspace')
         adspace.externalid = '1' * 200
         adspace.name = 'adspaceName'
@@ -143,10 +143,16 @@ class ResudsClientTestCase(TestCase):
         adspace.formatresourcetypelist = [frt, ]
 
         try:
-            res = self.client.CreateAdspace(name='', pwd='', operatorId='', Adspace=adspace)
+            res = client.CreateAdspace(name='', pwd='', operatorId='', Adspace=adspace)
             self.fail('Expect failing on create a adspace with too long externalid')
         except SoapException, e:
             self.assertEquals(e.message, u'EXTERNAL_ID_TOO_LONG [50]')
+
+    @httprettified
+    def testErrorWithoutDetails(self):
+        self.setupHttpPretty('wrongOnDelete', status_code=500)
+        client = ResudsClient(ResudsClientTestCase.wsdl_file)
+        self.assertRaises(SoapException, client.DeleteAdSpace, name='', pwd='', operatorId='', adSpaceId=123456)
 
     def setupHttpPretty(self, name, method=HTTPretty.POST, status_code=200):
         self.setupDefaultSchemas()

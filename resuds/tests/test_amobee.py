@@ -31,7 +31,7 @@ class AmobeeClientTestCase(TestCase):
     @httprettified
     def testWebFaultExceptionOnHttpError(self):
         self.setupHttpPretty('InvalidGetAdSpaceById', status_code=500)
-        client = AmobeeClient(AmobeeClientTestCase.wsdl_file, 'user', 'password', 'operator_id', faults=False)
+        client = AmobeeClient(AmobeeClientTestCase.wsdl_file, 'user', 'password', 'operator_id')
         adspace_id = 1234567890
         self.assertRaises(SoapException, client.GetAdSpaceById, name='', pwd='', operatorId='', adSpaceId=adspace_id)
 

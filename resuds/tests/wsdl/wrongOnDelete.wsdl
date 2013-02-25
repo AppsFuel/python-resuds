@@ -1,0 +1,1 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><soap:Fault><faultcode>soap:Client</faultcode><faultstring>Message part {http://Amobee.com/}DeleteAdSpace was not recognized.  (Does it exist in service WSDL?)</faultstring></soap:Fault></soap:Body></soap:Envelope>

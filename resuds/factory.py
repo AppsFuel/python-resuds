@@ -1,3 +1,5 @@
+from suds import WebFault
+
 __all__ = (
     'SoapObject',
     'Factory',
