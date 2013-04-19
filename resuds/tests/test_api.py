@@ -7,7 +7,7 @@ from resuds.tests import LOCALDIR
 
 
 class ResudsClientTestCase(TestCase):
-    wsdl_file = 'file://' + os.path.join(LOCALDIR, 'inventory.wsdl')
+    wsdl_file = 'file://' + os.path.join(LOCALDIR, 'inventory_service.wsdl')
 
     @httprettified
     def setUp(self):
@@ -161,6 +161,12 @@ class ResudsClientTestCase(TestCase):
         HTTPretty.register_uri(
             method,
             'http://localhost/invetory',
+            body=body,
+            status=status_code,
+        )
+        HTTPretty.register_uri(
+            method,
+            'https://localhost/invetory',
             body=body,
             status=status_code,
         )

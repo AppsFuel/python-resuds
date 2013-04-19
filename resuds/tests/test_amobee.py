@@ -7,7 +7,7 @@ from resuds.tests import LOCALDIR
 
 
 class AmobeeClientTestCase(TestCase):
-    wsdl_file = 'file://' + os.path.join(LOCALDIR, 'inventory.wsdl')
+    wsdl_file = 'file://' + os.path.join(LOCALDIR, 'inventory_service.wsdl')
 
     @httprettified
     def testCredential(self):
@@ -48,7 +48,7 @@ class AmobeeClientTestCase(TestCase):
             body = fp.read()
         HTTPretty.register_uri(
             method,
-            'http://localhost/invetory',
+            'https://localhost/invetory',
             body=body,
             status=status_code,
         )

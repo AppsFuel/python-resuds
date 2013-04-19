@@ -5,11 +5,11 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://schemas.xmlsoap.org/wsdl/">
 
-    <wsdl:import namespace="http://Amobee.com/Inventory/" location="inventory.wsdl"/>
+    <wsdl:import namespace="https://localhost/invetory" location="inventory.wsdl"/>
 
     <wsdl:service name="InventoryService">
         <wsdl:port name="Inventory" binding="tns:InventoryWSSoap">
-            <soap:address location="https://appsfuelweb.amobee.com/invetory"/>
+            <soap:address location="https://localhost/invetory"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
