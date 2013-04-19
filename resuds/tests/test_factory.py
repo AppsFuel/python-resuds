@@ -1,13 +1,14 @@
 import os
 from unittest import TestCase
 from httpretty import HTTPretty, httprettified
+from suds.client import SoapClient
 from resuds.tests import LOCALDIR
 from resuds.api import ResudsClient
 from resuds.factory import Factory
 
 
 class FactoryTestCase(TestCase):
-    wsdl_file = 'file://' + os.path.join(LOCALDIR, 'inventory.wsdl')
+    wsdl_file = 'file://' + os.path.join(LOCALDIR, 'inventory_service.wsdl')
 
     def testIsList(self):
         import collections
@@ -34,7 +35,7 @@ class FactoryTestCase(TestCase):
         adspace = self.createAdspace()
         l = [adspace, ]
         self.assertEquals(
-            '(AdspaceList){\n   Adspace[] = \n      (Adspace){\n         FormatResourceTypeList = \n            (FormatResourceTypeList){\n               FormatResourceType[] = \n                  (FormatResourceType){\n                     ResourceTypeIdList[] = \n                        5,\n                        6,\n                     _FormatId = 5\n                  },\n            }\n         CategoryIdList[] = <empty>\n         ExcludedTopicIdList[] = <empty>\n         _Id = ""\n         _ExternalId = "externalId"\n         _Name = "adspaceName"\n         _Description = ""\n         _PublisherId = ""\n         _MediaChannelId = ""\n         _PlacementWidth = ""\n         _PlacementHeight = ""\n         _Active = ""\n         _LongTail = ""\n         _EstDailyUsers = "1"\n         _EstDailyImps = "1"\n         _AllowCompanionFlights = ""\n         _Test = "false"\n         _SupportConvTracking = "false"\n         _MinAllowedCPC = ""\n         _MinAllowedCPM = ""\n      },\n }',
+            '(AdspaceList){\n   Adspace[] = \n      (Adspace){\n         FormatResourceTypeList = \n            (FormatResourceTypeList){\n               FormatResourceType[] = \n                  (FormatResourceType){\n                     ResourceTypeIdList = \n                        (EntityIdList){\n                           EntityId[] = \n                              5,\n                              6,\n                        }\n                     _FormatId = 5\n                  },\n            }\n         CategoryIdList = \n            (EntityIdList){\n               EntityId[] = \n                  2345,\n                  65432,\n            }\n         ExcludedTopicIdList = \n            (EntityIdList){\n               EntityId = None\n            }\n         _Id = ""\n         _ExternalId = "externalId"\n         _Name = "adspaceName"\n         _Description = ""\n         _PublisherId = ""\n         _MediaChannelId = ""\n         _PlacementWidth = ""\n         _PlacementHeight = ""\n         _Active = ""\n         _LongTail = ""\n         _EstDailyUsers = "1"\n         _EstDailyImps = "1"\n         _AllowCompanionFlights = ""\n         _Test = "false"\n         _SupportConvTracking = "false"\n         _MinAllowedCPC = ""\n         _MinAllowedCPM = ""\n      },\n }',
             repr(self.factory.build(self.client.client.factory, l))
         )
 
@@ -43,18 +44,20 @@ class FactoryTestCase(TestCase):
 
     def testBuildComplicatedObject(self):
         adspace = self.createAdspace()
+        envelope = self.getEnvelope(adspace)
         self.assertEquals(
-            '(Adspace){\n   FormatResourceTypeList = \n      (FormatResourceTypeList){\n         FormatResourceType[] = \n            (FormatResourceType){\n               ResourceTypeIdList[] = \n                  5,\n                  6,\n               _FormatId = 5\n            },\n      }\n   CategoryIdList[] = <empty>\n   ExcludedTopicIdList[] = <empty>\n   _Id = ""\n   _ExternalId = "externalId"\n   _Name = "adspaceName"\n   _Description = ""\n   _PublisherId = ""\n   _MediaChannelId = ""\n   _PlacementWidth = ""\n   _PlacementHeight = ""\n   _Active = ""\n   _LongTail = ""\n   _EstDailyUsers = "1"\n   _EstDailyImps = "1"\n   _AllowCompanionFlights = ""\n   _Test = "false"\n   _SupportConvTracking = "false"\n   _MinAllowedCPC = ""\n   _MinAllowedCPM = ""\n }',
-            repr(self.factory.build(self.client.client.factory, adspace))
+            '<?xml version="1.0" encoding="UTF-8"?>\n<SOAP-ENV:Envelope xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://Amobee.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">\n   <SOAP-ENV:Header/>\n   <ns0:Body>\n      <ns1:CreateAdspace>\n         <name>name</name>\n         <pwd>pwd</pwd>\n         <operatorId>opId</operatorId>\n         <Adspace ExternalId="externalId" Name="adspaceName" EstDailyUsers="1" EstDailyImps="1" Test="false" SupportConvTracking="false">\n            <FormatResourceTypeList>\n               <FormatResourceType FormatId="5">\n                  <ResourceTypeIdList>\n                     <EntityId>5</EntityId>\n                     <EntityId>6</EntityId>\n                  </ResourceTypeIdList>\n               </FormatResourceType>\n            </FormatResourceTypeList>\n            <CategoryIdList>\n               <EntityId>2345</EntityId>\n               <EntityId>65432</EntityId>\n            </CategoryIdList>\n         </Adspace>\n      </ns1:CreateAdspace>\n   </ns0:Body>\n</SOAP-ENV:Envelope>',
+            envelope
         )
 
     def testCreateAdspaceSoapObject(self):
         self.setupDefaultSchemas()
         adspace = self.createAdspace()
         self.assertEquals(adspace.cls_name, 'Adspace')
+        envelope = self.getEnvelope(adspace)
         self.assertEquals(
-            "Adspace({'estdailyusers': 1, 'minallowedcpm': '', 'description': '', 'placementheight': '', 'allowcompanionflights': '', 'placementwidth': '', 'mediachannelid': '', 'longtail': '', 'estdailyimps': 1, 'test': false, 'externalid': 'externalId', 'active': '', 'supportconvtracking': false, 'publisherid': '', 'id': '', 'minallowedcpc': '', 'name': 'adspaceName'}, {'excludedtopicidlist': [], 'formatresourcetypelist': [FormatResourceType({'formatid': 5}, {'resourcetypeidlist': [5, 6]})], 'categoryidlist': []})",
-            repr(adspace)
+            '<?xml version="1.0" encoding="UTF-8"?>\n<SOAP-ENV:Envelope xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://Amobee.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">\n   <SOAP-ENV:Header/>\n   <ns0:Body>\n      <ns1:CreateAdspace>\n         <name>name</name>\n         <pwd>pwd</pwd>\n         <operatorId>opId</operatorId>\n         <Adspace ExternalId="externalId" Name="adspaceName" EstDailyUsers="1" EstDailyImps="1" Test="false" SupportConvTracking="false">\n            <FormatResourceTypeList>\n               <FormatResourceType FormatId="5">\n                  <ResourceTypeIdList>\n                     <EntityId>5</EntityId>\n                     <EntityId>6</EntityId>\n                  </ResourceTypeIdList>\n               </FormatResourceType>\n            </FormatResourceTypeList>\n            <CategoryIdList>\n               <EntityId>2345</EntityId>\n               <EntityId>65432</EntityId>\n            </CategoryIdList>\n         </Adspace>\n      </ns1:CreateAdspace>\n   </ns0:Body>\n</SOAP-ENV:Envelope>',
+            envelope
         )
 
     def testGetUnexistentProperty(self):
@@ -76,14 +79,31 @@ class FactoryTestCase(TestCase):
             5, adspace.formatresourcetypelist[0].formatid
         )
         self.assertEquals(
-            [5, 6, ], adspace.formatresourcetypelist[0].resourcetypeidlist
+            [5, 6, ], adspace.formatresourcetypelist[0].resourcetypeidlist.entityid
         )
+
+    def testEntityIdList(self):
+        adspace = self.client.create('Adspace')
+        adspace.categoryidlist.entityid = [1, 2, 3, 4, ]
+        envelope = self.getEnvelope(adspace)
+        self.assertTrue('<CategoryIdList>' in envelope)
+        self.assertTrue('<EntityId>1</EntityId>' in envelope)
+        self.assertTrue('<EntityId>2</EntityId>' in envelope)
+        self.assertTrue('<EntityId>3</EntityId>' in envelope)
+        self.assertTrue('<EntityId>4</EntityId>' in envelope)
+        self.assertTrue('</CategoryIdList>' in envelope)
 
     @httprettified
     def setUp(self):
         self.setupDefaultSchemas()
         self.client = ResudsClient(FactoryTestCase.wsdl_file, faults=False)
         self.factory = Factory
+
+    def getEnvelope(self, obj, method='CreateAdspace'):
+        soapObject = Factory.build(self.client.client.factory, obj)
+        method = getattr(self.client.client.service, method)
+        c = SoapClient(method.client, method.method)
+        return str(c.method.binding.input.get_message(c.method, ('name', 'pwd', 'opId', soapObject, ), {}))
 
     def setupDefaultSchemas(self):
         with open(os.path.join(LOCALDIR, 'XMLSchema.xsd')) as fp:
@@ -98,7 +118,13 @@ class FactoryTestCase(TestCase):
         adspace = self.client.create('Adspace')
         adspace.name = 'adspaceName'
         adspace.externalid = 'externalId'
-        frt = self.client.create('FormatResourceType', formatid=5, resourcetypeidlist=[5, 6, ])
-        frtl = [frt, ]
-        adspace.formatresourcetypelist = frtl
+        frt = self.client.create('FormatResourceType')
+        frt.formatid = 5
+        rtil = self.client.create('ResourceTypeIdList')
+        rtil.entityid = [5, 6, ]
+        frt.resourcetypeidlist = rtil
+        adspace.formatresourcetypelist = [frt, ]
+        cil = self.client.create('CategoryIdList')
+        cil.entityid = [2345, 65432]
+        adspace.categoryidlist = cil
         return adspace

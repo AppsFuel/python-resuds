@@ -1,4 +1,5 @@
 from suds import WebFault
+from suds.sudsobject import Object
 
 __all__ = (
     'SoapObject',
@@ -7,6 +8,7 @@ __all__ = (
 
 
 class SoapObject(object):
+
     def __init__(self, name, attribute_keys, children_keys):
         self.cls_name = name
         self.attribute_keys = attribute_keys
@@ -36,18 +38,32 @@ class SoapObject(object):
         return self.cls_name + '(' + repr(self.attrs) + ', ' + repr(self.children) + ')'
 
 
+class EntityIdList(Object):
+
+    def __init__(self, ids):
+        Object.__init__(self)
+        self.EntityId = ids
+
+    def __unicode__(self):
+        return ''.join('<EntityId>{0}</EntityId>'.format(i) for i in self.EntityId)
+
+
 class Factory(object):
+
     @classmethod
     def rebuild(cls, obj):
         if not obj:
             return ''
         if not hasattr(obj, '__keylist__'):
             return str(obj)
-        if cls.is_list(obj):
-            return [Factory.rebuild(o) for o in obj[0]]
 
         attrs = [attr for attr in obj.__keylist__ if attr.startswith('_')]
         children = [child for child in obj.__keylist__ if not child.startswith('_')]
+        if cls.is_list(obj):
+            if set(children) == set(['EntityId']):
+                return SoapObject('EntityIdList', [], ['entityid'])
+            return [Factory.rebuild(o) for o in obj[0]]
+
         soapObject = SoapObject(obj.__class__.__name__, attrs, children)
         for attr in attrs:
             setattr(soapObject, Factory.clean(attr), getattr(obj, attr))
@@ -81,6 +97,8 @@ class Factory(object):
     def create_object(cls, factory, obj):
         if not hasattr(obj, 'cls_name'):
             return str(obj)
+        if (obj.cls_name == 'EntityIdList'):
+            return EntityIdList(obj.children['entityid'])
         soap = factory.create(obj.cls_name)
         for key in obj.attribute_keys:
             setattr(soap, key, getattr(obj, cls.clean(key)))
