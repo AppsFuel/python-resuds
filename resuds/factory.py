@@ -14,7 +14,8 @@ class SoapObject(object):
         self.attribute_keys = attribute_keys
         self.children_keys = children_keys
         self.attrs = dict((Factory.clean(attr), '') for attr in attribute_keys)
-        self.children = dict((Factory.clean(child), None) for child in children_keys)
+        self.children = dict((Factory.clean(child), None)
+                             for child in children_keys)
 
     def __setattr__(self, k, v):
         if k in ('cls_name', 'attribute_keys', 'children_keys', 'attrs', 'children'):
@@ -58,7 +59,8 @@ class Factory(object):
             return str(obj)
 
         attrs = [attr for attr in obj.__keylist__ if attr.startswith('_')]
-        children = [child for child in obj.__keylist__ if not child.startswith('_')]
+        children = [
+            child for child in obj.__keylist__ if not child.startswith('_')]
         if cls.is_list(obj):
             if set(children) == set(['EntityId']):
                 return SoapObject('EntityIdList', [], ['entityid'])
@@ -101,9 +103,13 @@ class Factory(object):
             return EntityIdList(obj.children['entityid'])
         soap = factory.create(obj.cls_name)
         for key in obj.attribute_keys:
-            setattr(soap, key, getattr(obj, cls.clean(key)))
+            val = getattr(obj, cls.clean(key))
+            if val:
+                setattr(soap, key, val)
         for key in obj.children_keys:
-            setattr(soap, key, cls.build(factory, getattr(obj, cls.clean(key))))
+            val = getattr(obj, cls.clean(key))
+            if val:
+                setattr(soap, key, cls.build(factory, val))
         return soap
 
     @classmethod
@@ -114,5 +120,6 @@ class Factory(object):
         else:
             element_class_name = l[0].cls_name
             obj_list = factory.create(element_class_name + 'List')
-            setattr(obj_list, element_class_name, [cls.build(factory, el) for el in l])
+            setattr(obj_list, element_class_name, [
+                    cls.build(factory, el) for el in l])
             return obj_list
